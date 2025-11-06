@@ -1,19 +1,33 @@
-# OneStop CI: Auto-Generate Gradle Wrapper
+# Fix: file_paths.xml parsing error
 
-This bundle adds:
-- `gradle.properties` with AndroidX + Jetifier enabled
-- GitHub Actions workflow that **first generates the Gradle Wrapper**
-  (`gradle wrapper --gradle-version 8.7`) and then builds your APK.
+**Problem**
+```
+[Fatal Error] file_paths.xml:2:6: The processing instruction target matching "[xX][mM][lL]" is not allowed.
+```
+This happens when an XML prolog like `<?xml version="1.0"?>` appears with any character (BOM/whitespace)
+before it, or when multiple `<?xml ...?>` lines exist.
 
-### Why this approach?
-We can't include the binary `gradle/wrapper/gradle-wrapper.jar` here, so the
-workflow provisions Gradle and creates the wrapper on CI before building.
-Locally, you can run the same once:
+**Solution**
+Use this `res/xml/file_paths.xml` *without* any XML prolog and ensure UTF-8 (no BOM).
 
-```bash
-# using a system Gradle 8.7 (or via SDKMAN/asdf)
-gradle wrapper --gradle-version 8.7
-./gradlew :app:assembleDebug
+**Where to place**
+`app/src/main/res/xml/file_paths.xml`
+
+**Manifest reminder**
+Make sure your `AndroidManifest.xml` has the `FileProvider` configured to use this file:
+```xml
+<provider
+    android:name="androidx.core.content.FileProvider"
+    android:authorities="${applicationId}.provider"
+    android:exported="false"
+    android:grantUriPermissions="true">
+    <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/file_paths" />
+</provider>
 ```
 
-Place these files at the **repo root** and push.
+**Rebuild**
+```bash
+./gradlew --no-daemon :app:assembleDebug
+```

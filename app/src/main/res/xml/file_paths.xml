@@ -1,7 +1,10 @@
-
-<?xml version="1.0" encoding="utf-8"?>
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Share app-internal files -->
+    <files-path name="files" path="."/>
+    <!-- Share app cache -->
     <cache-path name="cache" path="."/>
-    <external-cache-path name="ext_cache" path="."/>
-    <external-path name="external" path="Download/"/>
+    <!-- Share external app-specific storage -->
+    <external-files-path name="external_files" path="."/>
+    <!-- Share external storage root (use carefully) -->
+    <external-path name="external" path="."/>
 </paths>
