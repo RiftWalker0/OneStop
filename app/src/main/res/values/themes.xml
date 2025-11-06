@@ -1,21 +1,20 @@
-<resources>
-    <!-- Material You base -->
-    <style name="Theme.OneStop.M3" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@android:color/black</item>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.OneStop" parent="Theme.Material3.DayNight.NoActionBar" />
+    <style name="Theme.OneStop.Black" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="colorSurface">@android:color/black</item>
+        <item name="colorOnSurface">@android:color/white</item>
     </style>
+    <style name="Theme.OneStop.White" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="colorSurface">@android:color/white</item>
+        <item name="colorOnSurface">@android:color/black</item>
+    </style>
+    <style name="Theme.OneStop.MaterialYou" parent="Theme.Material3.DayNight.NoActionBar" />
 
-    <style name="Theme_OneStop_Black" parent="Theme.Material3.Dark.NoActionBar">
-        <item name="colorSurface">#000000</item>
-        <item name="colorOnSurface">#FFFFFF</item>
-        <item name="android:statusBarColor">@android:color/black</item>
-        <item name="android:navigationBarColor">@android:color/black</item>
-    </style>
-
-    <style name="Theme_OneStop_White" parent="Theme.Material3.Light.NoActionBar">
-        <item name="colorSurface">#FFFFFF</item>
-        <item name="colorOnSurface">#000000</item>
-        <item name="android:statusBarColor">@android:color/white</item>
-        <item name="android:navigationBarColor">@android:color/white</item>
-    </style>
+    <!-- Aliases -->
+    <style name="Theme_OneStop_Black" parent="Theme.OneStop.Black"/>
+    <style name="Theme_OneStop_White" parent="Theme.OneStop.White"/>
+    <style name="Theme_OneStop_MaterialYou" parent="Theme.OneStop.MaterialYou"/>
 </resources>

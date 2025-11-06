@@ -13,28 +13,29 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 
 public class UpdatesActivity extends BaseActivity {
+    private DrawerLayout drawer;
+
     @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_updates);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         ImageView btnMenu = findViewById(R.id.btn_menu);
-        if (btnMenu != null) btnMenu.setOnClickListener(v -> { if (drawer != null) drawer.openDrawer(Gravity.START); });
-
+        if (btnMenu != null) btnMenu.setOnClickListener(v -> drawer.openDrawer(Gravity.START));
         NavigationView nav = findViewById(R.id.nav_view);
         if (nav != null) nav.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
-            drawer.closeDrawers();
             if (id == R.id.nav_home) startActivity(new Intent(this, MainActivity.class));
             else if (id == R.id.nav_setup) startActivity(new Intent(this, SetupActivity.class));
             else if (id == R.id.nav_theme) startActivity(new Intent(this, ThemeActivity.class));
-            else if (id == R.id.nav_updates) startActivity(new Intent(this, UpdatesActivity.class));
+            else if (id == R.id.nav_updates) { /* stay */ }
             else if (id == R.id.nav_about) startActivity(new Intent(this, AboutActivity.class));
+            drawer.closeDrawers();
             return true;
         });
 
         Button btn = findViewById(R.id.btn_github);
-        btn.setOnClickListener(v -> {
+        if (btn != null) btn.setOnClickListener(v -> {
             Uri uri = Uri.parse("https://github.com/RiftWalker0/OneStop/releases/latest");
             startActivity(new Intent(Intent.ACTION_VIEW, uri));
         });

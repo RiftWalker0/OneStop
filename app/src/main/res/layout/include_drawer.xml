@@ -13,7 +13,11 @@
         android:padding="16dp">
 
         <include layout="@layout/include_header"/>
-        <include layout="@layout/content_home"/>
+        <FrameLayout
+            android:id="@+id/content_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -23,6 +27,6 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         android:background="?attr/colorSurface"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:menu="@xml/nav_menu"/>
+        app:menu="@xml/nav_menu"
+        xmlns:app="http://schemas.android.com/apk/res-auto"/>
 </androidx.drawerlayout.widget.DrawerLayout>

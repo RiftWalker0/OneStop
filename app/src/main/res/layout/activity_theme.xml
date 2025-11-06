@@ -1,26 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/include_drawer"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp">
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="?attr/colorBackground">
+        <RadioGroup
+            android:id="@+id/rg_theme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <include
-        android:id="@+id/header"
-        layout="@layout/include_header"
-        app:layout_constraintTop_toTopOf="parent"/>
+            <RadioButton
+                android:id="@+id/rb_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/theme_white"/>
 
+            <RadioButton
+                android:id="@+id/rb_material"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/theme_material"/>
 
-<RadioGroup
-    android:id='@+id/rg_theme'
-    android:layout_width='0dp' android:layout_height='wrap_content'
-    app:layout_constraintTop_toBottomOf='@id/header'
-    app:layout_constraintStart_toStartOf='parent'
-    app:layout_constraintEnd_toEndOf='parent'
-    android:padding='24dp'>
-
-    <RadioButton android:id='@+id/rb_white' android:text='@string/theme_white'/>
-    <RadioButton android:id='@+id/rb_material_you' android:text='@string/theme_material_you' android:layout_marginTop='8dp'/>
-    <RadioButton android:id='@+id/rb_black' android:text='@string/theme_black' android:layout_marginTop='8dp'/>
-</RadioGroup>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <RadioButton
+                android:id="@+id/rb_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/theme_black"/>
+        </RadioGroup>
+    </LinearLayout>
+</merge>
