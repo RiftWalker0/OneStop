@@ -1,5 +1,20 @@
 package com.onestop;
 
+import android.content.ContentResolver;
+import android.content.pm.PackageManager;
+import android.graphics.Typeface;
+import android.provider.Settings;
+import android.view.Gravity;
+import android.widget.ImageView;
+import android.widget.TextView;
+import com.google.android.material.navigation.NavigationView;
+import androidx.drawerlayout.widget.DrawerLayout;
+import com.onestop.R;
+import com.onestop.BuildConfig;
+import android.widget.RadioGroup;
+import android.widget.RadioButton;
+
+
 import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
