@@ -1,6 +1,0 @@
-
-<resources>
-    <style name="Theme_OneStop" parent="@style/Theme.OneStop"/>
-    <style name="Theme_OneStop_Black" parent="@style/Theme.OneStop.Black"/>
-    <style name="Theme_OneStop_White" parent="@style/Theme.OneStop.White"/>
-</resources>

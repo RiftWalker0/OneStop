@@ -18,15 +18,18 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
+      # Generate a proper Gradle Wrapper (adds gradlew, gradlew.bat and gradle/wrapper JAR)
+      - name: Generate Gradle Wrapper (Gradle 8.7)
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: 8.7
+          arguments: wrapper
 
-      - name: Ensure Gradle wrapper
-        run: |
-          if [ ! -f ./gradlew ]; then
-            gradle wrapper --gradle-version 8.7
-          fi
-          chmod +x ./gradlew
+      - name: Make wrapper executable
+        run: chmod +x ./gradlew
+
+      - name: Set up Gradle caching
+        uses: gradle/actions/setup-gradle@v4
 
       - name: Build Debug APK
         run: ./gradlew :app:assembleDebug --stacktrace
