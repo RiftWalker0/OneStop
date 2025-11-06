@@ -4,12 +4,12 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/pure_black">
+    android:background="?attr/colorBackground">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/pure_black">
+        android:background="?attr/colorBackground">
 
         <LinearLayout
             android:id="@+id/top_bar"
@@ -27,7 +27,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/ic_menu"
-                android:tint="@color/pure_white"
+                android:tint="?attr/colorOnBackground"
                 android:contentDescription="Menu" />
 
             <TextView
@@ -38,7 +38,7 @@
                 android:text="One Stop"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:textColor="@color/pure_white"
+                android:textColor="?attr/colorOnBackground"
                 android:gravity="center"/>
 
             <Space
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:text="@string/debug_off"
             android:textSize="18sp"
-            android:textColor="@color/pure_white"
+            android:textColor="?attr/colorOnBackground"
             app:layout_constraintTop_toBottomOf="@id/toggleView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,9 +75,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:background="@color/pure_black"
-        app:itemTextColor="@color/pure_white"
-        app:itemIconTint="@color/pure_white"
+        android:background="?attr/colorBackground"
+        app:itemTextColor="?attr/colorOnBackground"
+        app:itemIconTint="?attr/colorOnBackground"
         app:menu="@menu/drawer_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

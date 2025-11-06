@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/pure_black"
+    android:background="?attr/colorBackground"
     android:padding="16dp">
 
     <LinearLayout
@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/title_setup"
-            android:textColor="@color/pure_white"
+            android:textColor="?attr/colorOnBackground"
             android:textSize="22sp"
             android:textStyle="bold"
             android:layout_marginBottom="12dp" />
@@ -23,7 +23,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/pure_white"
+            android:textColor="?attr/colorOnBackground"
             android:text="ADB on PC:\n1) Enable Developer options.\n2) Turn on USB debugging.\n3) Connect to PC and run:\n   adb shell pm grant com.onestop android.permission.WRITE_SECURE_SETTINGS\n\nShizuku:\n1) Install Shizuku. Start the service (ADB or root).\n2) In Shizuku, grant permission to One Stop.\n3) Open the app and use the toggle.\n\nashell (App Shell):\n1) Install aShell from Play Store.\n2) Run aShell with Shizuku service running.\n3) Execute:\n   pm grant com.onestop android.permission.WRITE_SECURE_SETTINGS"
             android:textSize="16sp" />
 
