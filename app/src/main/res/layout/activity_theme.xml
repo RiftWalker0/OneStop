@@ -35,7 +35,47 @@
             android:textColor="?attr/colorOnBackground"
             android:gravity="center"/>
         <Space android:layout_width="32dp" android:layout_height="32dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="QS Tile Icon Style"
+            android:textStyle="bold"
+            android:textColor="?attr/colorOnBackground"
+            android:textSize="16sp"/>
+
+        <RadioGroup
+            android:id="@+id/rg_qs_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_qs_mono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monochrome"
+                android:textColor="?attr/colorOnBackground"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/rb_qs_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Colored"
+                android:layout_marginStart="24dp"
+                android:textColor="?attr/colorOnBackground"/>
+        </RadioGroup>
     </LinearLayout>
+
+</LinearLayout>
 
 
     <TextView
@@ -73,6 +113,46 @@
             android:text="Pitch Black"
             android:textColor="?attr/colorOnBackground"/>
     </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="QS Tile Icon Style"
+            android:textStyle="bold"
+            android:textColor="?attr/colorOnBackground"
+            android:textSize="16sp"/>
+
+        <RadioGroup
+            android:id="@+id/rg_qs_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_qs_mono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monochrome"
+                android:textColor="?attr/colorOnBackground"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/rb_qs_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Colored"
+                android:layout_marginStart="24dp"
+                android:textColor="?attr/colorOnBackground"/>
+        </RadioGroup>
+    </LinearLayout>
+
 </LinearLayout>
 
         <com.google.android.material.navigation.NavigationView

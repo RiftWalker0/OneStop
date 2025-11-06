@@ -6,6 +6,8 @@ import android.widget.RadioGroup;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import android.widget.RadioGroup;
+import android.widget.RadioButton;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import android.view.Gravity;
@@ -32,8 +34,21 @@ public class ThemeActivity extends AppCompatActivity {
     private DrawerLayout drawer;
         applyTheme();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_theme);
-        drawer = findViewById(R.id.drawer_layout);
+
+                        setContentView(R.layout.activity_theme);
+                        RadioGroup rg = findViewById(R.id.rg_qs_style);
+                        RadioButton rbMono = findViewById(R.id.rb_qs_mono);
+                        RadioButton rbColor = findViewById(R.id.rb_qs_color);
+                        if (rg != null && rbMono != null && rbColor != null) {
+                            boolean mono = Prefs.getQsIconMonochrome(this);
+                            rbMono.setChecked(mono);
+                            rbColor.setChecked(!mono);
+                            rg.setOnCheckedChangeListener((g, id) -> {
+                                boolean m = (id == R.id.rb_qs_mono);
+                                Prefs.setQsIconMonochrome(this, m);
+                            });
+                        }
+                        drawer = findViewById(R.id.drawer_layout);
         NavigationView nav = findViewById(R.id.nav_view);
         if (nav != null) {
             nav.setCheckedItem(R.id.nav_theme);
