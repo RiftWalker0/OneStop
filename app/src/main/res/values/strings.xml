@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">One Stop</string>
     <string name="home">Home</string>
@@ -7,12 +6,16 @@
     <string name="updates">Updates</string>
     <string name="about">About</string>
     <string name="menu">Menu</string>
-    <string name="debug_on">Debugging On</string>
-    <string name="debug_off">Debugging Off</string>
-    <string name="download_latest">Go to GitHub</string>
+    <string name="toggle_on">Debugging On</string>
+    <string name="toggle_off">Debugging Off</string>
+    <string name="latest_release">Go to GitHub</string>
+    <string name="download_latest">Download Latest</string>
+    <string name="updates_info">Tap below to check for updates or download the latest build.</string>
     <string name="version_label">Version</string>
-    <string name="developer_note">Developed by RiftWalker / Insomniac</string>
+    <string name="built_by">Developed by RiftWalker/Insomniac</string>
+    <string name="pc">PC</string>
+    <string name="mobile">Mobile</string>
     <string name="theme_white">Pure White</string>
-    <string name="theme_material">Material You</string>
     <string name="theme_black">Pitch Black</string>
+    <string name="theme_material">Material You</string>
 </resources>

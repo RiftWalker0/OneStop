@@ -1,29 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <include layout="@layout/include_drawer"/>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
-
+        android:orientation="vertical">
+        <include layout="@layout/include_toolbar"/>
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/tv_pc"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="PC:\nadb shell pm grant com.onestop android.permission.WRITE_SECURE_SETTINGS\n\nDisable Permission Monitoring in Developer options."/>
-        <TextView
-            android:id="@+id/tv_mobile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="Mobile (aShell):\nGrant WRITE_SECURE_SETTINGS using aShell app.\n\nDisable Permission Monitoring in Developer options."/>
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+                <TextView
+                    android:id="@+id/tv_pc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="PC:\n1) adb shell pm grant com.onestop android.permission.WRITE_SECURE_SETTINGS\n2) Disable Permission Monitoring in Developer options."
+                    android:padding="8dp"/>
+                <TextView
+                    android:id="@+id/tv_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mobile (AShell):\n1) Install AShell.\n2) Run: pm grant com.onestop android.permission.WRITE_SECURE_SETTINGS\n3) Disable Permission Monitoring in Developer options."
+                    android:padding="8dp"
+                    android:visibility="gone"/>
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
-</merge>
+    <include layout="@layout/include_drawer"/>
+</androidx.drawerlayout.widget.DrawerLayout>

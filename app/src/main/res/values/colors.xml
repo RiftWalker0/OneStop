@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="toggle_red">#FF3B30</color>
-    <color name="toggle_green">#34C759</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="green_on">#26A269</color>
+    <color name="red_off">#D32F2F</color>
 </resources>

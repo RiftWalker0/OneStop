@@ -1,28 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/content_root"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/colorSurface"
-        android:padding="16dp">
+        android:orientation="vertical">
 
-        <include layout="@layout/include_header"/>
-        <include layout="@layout/content_home"/>
+        <include layout="@layout/include_toolbar"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <FrameLayout
+                android:id="@+id/toggle_holder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/toggle_ring"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:src="@drawable/toggle_ring"/>
+
+                <ImageView
+                    android:id="@+id/toggle_inner"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/toggle_inner_red"/>
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tv_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/toggle_off"
+                android:textSize="16sp"/>
+        </LinearLayout>
     </LinearLayout>
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="280dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        android:background="?attr/colorSurface"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:menu="@xml/nav_menu"/>
+    <include layout="@layout/include_drawer"/>
 </androidx.drawerlayout.widget.DrawerLayout>
