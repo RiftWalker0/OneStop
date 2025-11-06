@@ -5,13 +5,13 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
 public class AboutActivity extends AppCompatActivity {
@@ -49,9 +49,14 @@ public class AboutActivity extends AppCompatActivity {
             });
         }
 
-        ImageView btnMenu = findViewById(R.id.btn_menu);
-        if (btnMenu != null) {
-            btnMenu.setOnClickListener(v -> { if (drawer != null) drawer.openDrawer(Gravity.START); });
+        MaterialToolbar topBar = findViewById(R.id.top_bar);
+        if (topBar != null) {
+            topBar.setTitle(R.string.title_about);
+            topBar.setNavigationOnClickListener(v -> {
+                if (drawer != null) {
+                    drawer.openDrawer(Gravity.START);
+                }
+            });
         }
 
         TextView tvVersion = findViewById(R.id.tv_version);
