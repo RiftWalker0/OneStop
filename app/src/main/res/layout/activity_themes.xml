@@ -31,7 +31,7 @@
                 android:gravity="center"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
                 android:textColor="?attr/colorOnSurface"
-                android:text="Main"/>
+                android:text="Themes"/>
 
             <View
                 android:layout_width="48dp"
@@ -42,27 +42,33 @@
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="1"
-    android:gravity="center"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:padding="16dp">
 
-    <ToggleButton
-        android:id="@+id/toggle_debug"
-        android:layout_width="220dp"
-        android:layout_height="220dp"
-        android:textOn="ON"
-        android:textOff="OFF"
-        android:background="@android:color/transparent"
-        android:textColor="?attr/colorOnSurface"/>
-
-    <TextView
-        android:id="@+id/tv_state"
-        android:layout_width="wrap_content"
+    <RadioGroup
+        android:id="@+id/theme_group"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/debug_off"
-        android:textColor="?attr/colorOnSurface"
-        android:textSize="18sp"/>
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rb_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pure White"/>
+
+        <RadioButton
+            android:id="@+id/rb_material_you"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Material You"/>
+
+        <RadioButton
+            android:id="@+id/rb_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pitch Black"/>
+    </RadioGroup>
 </LinearLayout>
 
     </LinearLayout>

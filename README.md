@@ -1,23 +1,27 @@
-# Fix: Adaptive icon XML prolog/BOM issue
+# One Stop — Minimal Full Repo (Java, Views, Material3)
 
-Error:
+This repository builds an app with:
+- Single big toggle on Home to set `ADB_ENABLED` and `development_settings_enabled` (needs `WRITE_SECURE_SETTINGS`).
+- Navigation drawer (Home, Setup, Themes, Updates, About).
+- **Themes**: Pure White, Material You (M3 + Dynamic Colors), Pitch Black.
+- QS Tile to toggle the same setting.
+- Updates page linking to the latest GitHub release.
+- About page shows version and build number.
+- GitHub Actions workflow that generates the Gradle wrapper and builds the debug APK.
+
+## Build locally
 ```
-The processing instruction target matching "[xX][mM][lL]" is not allowed.
+# Install Gradle 8.7 or use the wrapper after first generation:
+gradle wrapper --gradle-version 8.7
+./gradlew :app:assembleDebug
 ```
-This happens when `res/mipmap-anydpi-v26/ic_launcher.xml` (or `ic_launcher_round.xml`) contains a BOM or an XML prolog not at byte 0.
 
-## What this patch provides
-- Clean adaptive icon XMLs (no `<?xml ...?>`, no BOM)
-- A simple vector foreground (`@drawable/ic_launcher_foreground`) shaped like a radio button
-- A black background color at `@color/ic_launcher_background`
-
-## Where to place
-- `app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml`
-- `app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml`
-- `app/src/main/res/drawable/ic_launcher_foreground.xml`
-- `app/src/main/res/values/ic_launcher_background.xml`
-
-## Rebuild
-```bash
-./gradlew --no-daemon :app:assembleDebug
+## Granting permission
 ```
+adb shell pm grant com.onestop android.permission.WRITE_SECURE_SETTINGS
+```
+Or from a shell app (aShell) on-device:
+```
+pm grant com.onestop android.permission.WRITE_SECURE_SETTINGS
+```
+Then disable "permission monitoring" in Developer options to keep it from being revoked.
