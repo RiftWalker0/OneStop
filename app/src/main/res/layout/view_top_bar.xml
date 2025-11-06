@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.MaterialToolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/top_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorSurface"
+    android:gravity="center_vertical"
+    android:minHeight="?attr/actionBarSize"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    app:navigationContentDescription="@string/menu"
+    app:navigationIcon="@drawable/ic_menu"
+    app:navigationIconTint="?attr/colorOnSurface"
+    app:titleCentered="true"
+    app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge"
+    app:titleTextColor="?attr/colorOnSurface" />
