@@ -6,14 +6,13 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.Gravity;
-import android.widget.ImageView;
-import android.os.Handler;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,20 +42,31 @@ public class MainActivity extends AppCompatActivity {
         state = findViewById(R.id.state);
         toggle = findViewById(R.id.toggleView);
 
-        ImageView btnMenu = findViewById(R.id.btn_menu);
-        btnMenu.setOnClickListener(v -> drawer.openDrawer(Gravity.START));
+        MaterialToolbar topBar = findViewById(R.id.top_bar);
+        if (topBar != null) {
+            topBar.setTitle(R.string.home);
+            topBar.setNavigationOnClickListener(v -> {
+                if (drawer != null) {
+                    drawer.openDrawer(Gravity.START);
+                }
+            });
+        }
 
         NavigationView nav = findViewById(R.id.nav_view);
-        if (nav != null) { nav.setCheckedItem(R.id.nav_home); }
-        nav.setNavigationItemSelectedListener(item -> {
-            drawer.closeDrawers();
-            int id = item.getItemId();
-            if (id == R.id.nav_setup) startActivity(new Intent(this, SetupActivity.class));
-            else if (id == R.id.nav_theme) startActivity(new Intent(this, ThemeActivity.class));
-            else if (id == R.id.nav_updates) startActivity(new Intent(this, UpdatesActivity.class));
-            else if (id == R.id.nav_about) startActivity(new Intent(this, AboutActivity.class));
-            return true;
-        });
+        if (nav != null) {
+            nav.setCheckedItem(R.id.nav_home);
+            nav.setNavigationItemSelectedListener(item -> {
+                if (drawer != null) {
+                    drawer.closeDrawers();
+                }
+                int id = item.getItemId();
+                if (id == R.id.nav_setup) startActivity(new Intent(this, SetupActivity.class));
+                else if (id == R.id.nav_theme) startActivity(new Intent(this, ThemeActivity.class));
+                else if (id == R.id.nav_updates) startActivity(new Intent(this, UpdatesActivity.class));
+                else if (id == R.id.nav_about) startActivity(new Intent(this, AboutActivity.class));
+                return true;
+            });
+        }
 
         boolean initialOn = readBothEnabled(getContentResolver());
         toggle.setChecked(initialOn);
