@@ -1,26 +1,8 @@
 package com.onestop;
 
-import androidx.drawerlayout.widget.DrawerLayout;
-import com.onestop.R;
-
-import android.widget.RadioGroup;
-import android.widget.RadioButton;
-import android.app.DownloadManager;
-import android.content.ActivityNotFoundException;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.IntentFilter;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.Environment;
-import android.widget.Button;
-import androidx.core.content.FileProvider;
-
-
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.Gravity;
@@ -35,7 +17,6 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
     private androidx.drawerlayout.widget.DrawerLayout drawer;
-    private TextView title;
     private TextView state;
     private ToggleView toggle;
     private int lastTheme;
@@ -51,23 +32,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
         applyTheme();
         lastTheme = Prefs.getTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         drawer = findViewById(R.id.drawer_layout);
-        title = findViewById(R.id.title);
         state = findViewById(R.id.state);
         toggle = findViewById(R.id.toggleView);
-
-        try {
-            Typeface coolJazz = Typeface.createFromAsset(getAssets(), "fonts/cooljazz.ttf");
-            title.setTypeface(coolJazz);
-            state.setTypeface(coolJazz);
-        } catch (Throwable ignored) {}
 
         ImageView btnMenu = findViewById(R.id.btn_menu);
         btnMenu.setOnClickListener(v -> drawer.openDrawer(Gravity.START));
@@ -76,47 +49,37 @@ public class MainActivity extends AppCompatActivity {
         nav.setNavigationItemSelectedListener(item -> {
             drawer.closeDrawers();
             int id = item.getItemId();
-            if (id == R.id.nav_setup) {
-                startActivity(new Intent(this, SetupActivity.class));
-            } else if (id == R.id.nav_theme) {
-                startActivity(new Intent(this, ThemeActivity.class));
-            } else if (id == R.id.nav_updates) {
-                startActivity(new Intent(this, UpdatesActivity.class));
-            } else if (id == R.id.nav_about) {
-                startActivity(new Intent(this, AboutActivity.class));
-            }
+            if (id == R.id.nav_setup) startActivity(new Intent(this, SetupActivity.class));
+            else if (id == R.id.nav_theme) startActivity(new Intent(this, ThemeActivity.class));
+            else if (id == R.id.nav_updates) startActivity(new Intent(this, UpdatesActivity.class));
+            else if (id == R.id.nav_about) startActivity(new Intent(this, AboutActivity.class));
             return true;
         });
 
         boolean initialOn = readBothEnabled(getContentResolver());
         toggle.setChecked(initialOn);
         updateStateText(initialOn);
-
         toggle.setOnToggleChanged(this::onToggle);
     }
 
-    @Override
-    protected void onResume() {
+    @Override protected void onResume() {
         super.onResume();
-        if (lastTheme != Prefs.getTheme(this)) {
-            recreate();
-        }
+        if (lastTheme != Prefs.getTheme(this)) recreate();
     }
 
     private void onToggle(boolean on) {
         if (!hasWriteSecureSettings()) {
             Toast.makeText(this,
-                    "Grant WRITE_SECURE_SETTINGS via ADB:\nadb shell pm grant com.onestop android.permission.WRITE_SECURE_SETTINGS",
-                    Toast.LENGTH_LONG).show();
+                "Grant WRITE_SECURE_SETTINGS via ADB:\nadb shell pm grant com.onestop android.permission.WRITE_SECURE_SETTINGS",
+                Toast.LENGTH_LONG).show();
             toggle.setOnToggleChanged(null);
             toggle.setChecked(readBothEnabled(getContentResolver()));
             toggle.setOnToggleChanged(this::onToggle);
             updateStateText(toggle.isChecked());
             return;
         }
-        if (applyDebugSetting(on)) {
-            updateStateText(on);
-        } else {
+        if (applyDebugSetting(on)) updateStateText(on);
+        else {
             Toast.makeText(this, "Failed to write system settings.", Toast.LENGTH_SHORT).show();
             boolean actual = readBothEnabled(getContentResolver());
             toggle.setOnToggleChanged(null);

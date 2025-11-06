@@ -1,31 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/colorBackground"
-    android:padding="16dp">
-
-    <LinearLayout
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="?android:colorBackground"
+        android:padding="16dp">
 
-        <TextView
-            android:id="@+id/title_setup"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/title_setup"
-            android:textColor="?attr/colorOnBackground"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="12dp" />
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="?attr/colorOnBackground"
-            android:text="ADB on PC:\n1) Enable Developer options.\n2) Turn on USB debugging.\n3) Connect to PC and run:\n   adb shell pm grant com.onestop android.permission.WRITE_SECURE_SETTINGS\n\nShizuku:\n1) Install Shizuku. Start the service (ADB or root).\n2) In Shizuku, grant permission to One Stop.\n3) Open the app and use the toggle.\n\nashell (App Shell):\n1) Install aShell from Play Store.\n2) Run aShell with Shizuku service running.\n3) Execute:\n   pm grant com.onestop android.permission.WRITE_SECURE_SETTINGS"
-            android:textSize="16sp" />
+            <TextView
+                android:id="@+id/title_setup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_setup"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
 
-    </LinearLayout>
-</ScrollView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorOnBackground"
+                android:text="ADB on PC:
+1) Enable Developer options.
+2) Turn on USB debugging.
+3) Connect to PC and run:
+   adb shell pm grant com.onestop android.permission.WRITE_SECURE_SETTINGS
+
+Shizuku:
+1) Install Shizuku. Start the service (ADB or root).
+2) In Shizuku, grant permission to One Stop.
+3) Open the app and use the toggle.
+
+ashell (App Shell):
+1) Install aShell from Play Store.
+2) Run aShell with Shizuku service running.
+3) Execute:
+   pm grant com.onestop android.permission.WRITE_SECURE_SETTINGS"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </ScrollView>

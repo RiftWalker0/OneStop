@@ -8,8 +8,8 @@ android {
         applicationId = "com.onestop"
         minSdk = 24
         targetSdk = 34
-        versionCode = 2
-        versionName = "1.1"
+        versionCode = 5
+        versionName = "1.1.5"
     }
 
     compileOptions {
@@ -27,9 +27,7 @@ android {
 
     buildFeatures { viewBinding = true }
 
-    packaging {
-        resources.excludes += setOf("META-INF/AL2.0","META-INF/LGPL2.1")
-    }
+    packaging { resources.excludes += setOf("META-INF/AL2.0","META-INF/LGPL2.1") }
 }
 
 dependencies {

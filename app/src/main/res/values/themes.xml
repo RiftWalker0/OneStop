@@ -1,35 +1,25 @@
 <resources>
-                <!-- Pitch Black (default) -->
-                <style name="Theme_OneStop_Black" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-                    <!-- Background & surfaces -->
-                    <item name="android:colorBackground">#000000</item>
-                    <item name="colorSurface">#121212</item>
-                    <item name="colorOnBackground">#FFFFFF</item>
-                    <item name="colorOnSurface">#FFFFFF</item>
+    <style name="Theme_OneStop_Black" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:colorBackground">#000000</item>
+        <item name="colorSurface">#121212</item>
+        <item name="colorOnBackground">#FFFFFF</item>
+        <item name="colorOnSurface">#FFFFFF</item>
+        <item name="colorPrimary">#FFFFFF</item>
+        <item name="colorOnPrimary">#000000</item>
+        <item name="android:statusBarColor">#000000</item>
+        <item name="android:navigationBarColor">#000000</item>
+    </style>
 
-                    <!-- Primary just for controls/accents -->
-                    <item name="colorPrimary">#FFFFFF</item>
-                    <item name="colorOnPrimary">#000000</item>
+    <style name="Theme_OneStop_White" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:colorBackground">#FFFFFF</item>
+        <item name="colorSurface">#FFFFFF</item>
+        <item name="colorOnBackground">#000000</item>
+        <item name="colorOnSurface">#000000</item>
+        <item name="colorPrimary">#000000</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="android:statusBarColor">#FFFFFF</item>
+        <item name="android:navigationBarColor">#FFFFFF</item>
+    </style>
 
-                    <!-- Status/Nav bars -->
-                    <item name="android:statusBarColor">#000000</item>
-                    <item name="android:navigationBarColor">#000000</item>
-                </style>
-
-                <!-- Pure White -->
-                <style name="Theme_OneStop_White" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-                    <item name="android:colorBackground">#FFFFFF</item>
-                    <item name="colorSurface">#FFFFFF</item>
-                    <item name="colorOnBackground">#000000</item>
-                    <item name="colorOnSurface">#000000</item>
-
-                    <item name="colorPrimary">#000000</item>
-                    <item name="colorOnPrimary">#FFFFFF</item>
-
-                    <item name="android:statusBarColor">#FFFFFF</item>
-                    <item name="android:navigationBarColor">#FFFFFF</item>
-                </style>
-
-                <!-- Material You (dynamic colors applied at runtime) -->
-                <style name="Theme_OneStop_MaterialYou" parent="Theme.MaterialComponents.DayNight.NoActionBar" />
-            </resources>
+    <style name="Theme_OneStop_MaterialYou" parent="Theme.MaterialComponents.DayNight.NoActionBar"/>
+</resources>

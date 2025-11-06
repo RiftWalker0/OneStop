@@ -1,30 +1,5 @@
 package com.onestop;
 
-import android.content.ContentResolver;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Typeface;
-import android.provider.Settings;
-import android.view.Gravity;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-import com.google.android.material.navigation.NavigationView;
-import androidx.drawerlayout.widget.DrawerLayout;
-import com.onestop.R;
-
-import android.app.DownloadManager;
-import android.content.ActivityNotFoundException;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.IntentFilter;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.Environment;
-import android.widget.Button;
-import androidx.core.content.FileProvider;
-
-
 import android.os.Bundle;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -43,9 +18,7 @@ public class ThemeActivity extends AppCompatActivity {
         }
     }
 
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
         applyTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theme);
@@ -56,15 +29,12 @@ public class ThemeActivity extends AppCompatActivity {
         RadioButton rbBlack = findViewById(R.id.rb_black);
 
         int mode = Prefs.getTheme(this);
-        if (mode == 0) rbWhite.setChecked(true);
-        else if (mode == 1) rbMaterial.setChecked(true);
-        else rbBlack.setChecked(true);
+        rbWhite.setChecked(mode==0);
+        rbMaterial.setChecked(mode==1);
+        rbBlack.setChecked(mode==2);
 
         group.setOnCheckedChangeListener((g, id) -> {
-            int newMode = 2;
-            if (id == R.id.rb_white) newMode = 0;
-            else if (id == R.id.rb_material) newMode = 1;
-            else if (id == R.id.rb_black) newMode = 2;
+            int newMode = (id==R.id.rb_white)?0 : (id==R.id.rb_material?1:2);
             Prefs.setTheme(this, newMode);
             recreate();
         });

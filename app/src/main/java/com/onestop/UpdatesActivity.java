@@ -1,22 +1,6 @@
 package com.onestop;
 
-import android.content.ContentResolver;
-import android.content.pm.PackageManager;
-import android.graphics.Typeface;
-import android.provider.Settings;
-import android.view.Gravity;
-import android.widget.ImageView;
-import android.widget.TextView;
-import com.google.android.material.navigation.NavigationView;
-import androidx.drawerlayout.widget.DrawerLayout;
-import com.onestop.R;
-
-import android.widget.RadioGroup;
-import android.widget.RadioButton;
-
-
 import android.app.DownloadManager;
-import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -37,7 +21,6 @@ import java.io.File;
 public class UpdatesActivity extends AppCompatActivity {
     private long downloadId = -1L;
 
-
     private void applyTheme() {
         int mode = Prefs.getTheme(this);
         switch (mode) {
@@ -48,7 +31,7 @@ public class UpdatesActivity extends AppCompatActivity {
     }
 
 
-    private final BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override public void onReceive(Context context, Intent intent) {
             long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
             if (id == downloadId) {
@@ -68,7 +51,7 @@ public class UpdatesActivity extends AppCompatActivity {
                                 install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                 startActivity(install);
                             } catch (Exception e) {
-                                Toast.makeText(UpdatesActivity.this, "Open the file from Downloads to install.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(UpdatesActivity.this, "Open from Downloads to install.", Toast.LENGTH_LONG).show();
                             }
                         }
                     } else {
@@ -88,35 +71,28 @@ public class UpdatesActivity extends AppCompatActivity {
         Button btnWeb = findViewById(R.id.btn_open_github);
         Button btnDl = findViewById(R.id.btn_download_latest);
 
-        btnWeb.setOnClickListener(v -> {
-            Uri uri = Uri.parse(getString(R.string.latest_release_url));
-            startActivity(new Intent(Intent.ACTION_VIEW, uri));
-        });
-
+        btnWeb.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.latest_release_url)))));
         btnDl.setOnClickListener(v -> startDownloadLatest());
     }
 
     private void startDownloadLatest() {
-        String url = getString(R.string.latest_release_url);
         try {
             DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-            DownloadManager.Request req = new DownloadManager.Request(Uri.parse(url));
+            DownloadManager.Request req = new DownloadManager.Request(Uri.parse(getString(R.string.latest_release_url)));
             req.setTitle("One Stop latest release");
             req.setDescription("Downloading...");
             req.setDestinationInExternalFilesDir(this, Environment.DIRECTORY_DOWNLOADS, "OneStop-latest.apk");
             req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
             downloadId = dm.enqueue(req);
-            registerReceiver(downloadReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+            registerReceiver(receiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
             Toast.makeText(this, "Downloading…", Toast.LENGTH_SHORT).show();
-        } catch (ActivityNotFoundException e) {
-            Toast.makeText(this, "No downloader available.", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Toast.makeText(this, "Failed to start download.", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override protected void onDestroy() {
-        try { unregisterReceiver(downloadReceiver); } catch (Throwable ignored) {}
+        try { unregisterReceiver(receiver); } catch (Throwable ignored) {}
         super.onDestroy();
     }
 }
