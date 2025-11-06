@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.onestop.R;
-import com.onestop.BuildConfig;
+
 import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;

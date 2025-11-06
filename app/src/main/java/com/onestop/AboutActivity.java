@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.onestop.R;
-import com.onestop.BuildConfig;
+
 import android.widget.RadioGroup;
 import android.widget.RadioButton;
 import android.app.DownloadManager;
@@ -49,7 +49,14 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
 
         TextView tvVersion = findViewById(R.id.tv_version);
-        tvVersion.setText(getString(R.string.version_label) + ": " + BuildConfig.VERSION_NAME);
+        try {
+    String pkg = getPackageName();
+    String ver = getPackageManager().getPackageInfo(pkg, 0).versionName;
+    tvVersion.setText(getString(R.string.version_label) + ": " + ver);
+} catch (Exception e) {
+    tvVersion.setText(getString(R.string.version_label) + ": ?");
+}
+
 
         TextView tvDev = findViewById(R.id.tv_developer);
     }

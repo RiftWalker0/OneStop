@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.google.android.material.navigation.NavigationView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.onestop.R;
-import com.onestop.BuildConfig;
+
 import android.widget.RadioGroup;
 import android.widget.RadioButton;
 

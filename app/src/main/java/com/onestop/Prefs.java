@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.navigation.NavigationView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.onestop.R;
-import com.onestop.BuildConfig;
+
 import android.widget.RadioGroup;
 import android.widget.RadioButton;
 import android.app.DownloadManager;
