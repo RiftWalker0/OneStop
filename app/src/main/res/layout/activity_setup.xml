@@ -6,6 +6,7 @@
     android:background="?android:colorBackground"
     android:padding="16dp">
 
+    <!-- Top bar with menu -->
     <LinearLayout
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
@@ -44,10 +45,34 @@
         android:layout_height="wrap_content"
         app:tabIndicatorFullWidth="false"/>
 
-    <FrameLayout
-        android:id="@+id/tab_container"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tv_pc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="16sp"
+                android:text="Grant WRITE_SECURE_SETTINGS via ADB on PC:\n\n1) Enable Developer options and USB debugging.\n2) Connect phone to PC with USB.\n3) Run:\n   adb shell pm grant com.onestop android.permission.WRITE_SECURE_SETTINGS\n\nDisable permission monitoring (if present):\n  Settings > Developer options > Disable permission monitoring."/>
+
+            <TextView
+                android:id="@+id/tv_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="16sp"
+                android:text="Grant via Mobile (aShell/terminal with adb over network):\n\n1) Ensure adb over network/sh wireless debugging is available.\n2) Execute:\n   pm grant com.onestop android.permission.WRITE_SECURE_SETTINGS\n\nDisable permission monitoring (if present):\n  Settings > Developer options > Disable permission monitoring."/>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

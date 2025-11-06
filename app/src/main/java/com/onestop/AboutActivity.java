@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import android.widget.ImageView;
+import android.content.Intent;
 
 public class AboutActivity extends AppCompatActivity {
     private void applyTheme() {
@@ -23,7 +25,14 @@ public class AboutActivity extends AppCompatActivity {
         applyTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-
+        ImageView btnMenu = findViewById(R.id.btn_menu);
+        if (btnMenu != null) {
+            btnMenu.setOnClickListener(v -> {
+                Intent i = new Intent(this, MainActivity.class);
+                i.putExtra("open_drawer", true);
+                startActivity(i);
+            });
+        }
         TextView tvVersion = findViewById(R.id.tv_version);
         try {
             PackageManager pm = getPackageManager();
