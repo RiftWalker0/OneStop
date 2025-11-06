@@ -23,7 +23,7 @@
     android:text=""
     android:insetTop="0dp"
     android:insetBottom="0dp"
-    android:cornerRadius="100dp"/>
+   />
 
 <TextView
     android:id="@+id/tvState"
