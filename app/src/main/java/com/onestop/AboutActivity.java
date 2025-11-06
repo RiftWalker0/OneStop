@@ -24,7 +24,18 @@ public class AboutActivity extends AppCompatActivity {
         TextView tvVersion = findViewById(R.id.tv_version);
         try {
             String ver = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-            tvVersion.setText(getString(R.string.version_label) + ": " + ver);
+            try {
+    long code;
+    if (android.os.Build.VERSION.SDK_INT >= 28) {
+        code = getPackageManager().getPackageInfo(getPackageName(), 0).getLongVersionCode();
+    } else {
+        code = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
+    }
+    tvVersion.setText(getString(R.string.version_label) + ": " + ver + " (" + code + ")");
+} catch (Exception e2) {
+    tvVersion.setText(getString(R.string.version_label) + ": " + ver);
+}
+
         } catch (Exception e) {
             tvVersion.setText(getString(R.string.version_label) + ": ?");
         }

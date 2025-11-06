@@ -1,45 +1,53 @@
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?android:colorBackground"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:id="@+id/top_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?android:colorBackground"
-        android:padding="16dp">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/btn_menu"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_menu"
+            android:tint="?attr/colorOnBackground"
+            android:contentDescription="Menu" />
+
+        <TextView
+            android:id="@+id/title_generic"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_weight="1"
+            android:text="@string/title_setup"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="?attr/colorOnBackground"
+            android:gravity="center"/>
 
-            <TextView
-                android:id="@+id/title_setup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/title_setup"
-                android:textColor="?attr/colorOnBackground"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="12dp" />
+        <Space
+            android:layout_width="32dp"
+            android:layout_height="32dp"/>
+    </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="?attr/colorOnBackground"
-                android:text="ADB on PC:
-1) Enable Developer options.
-2) Turn on USB debugging.
-3) Connect to PC and run:
-   adb shell pm grant com.onestop android.permission.WRITE_SECURE_SETTINGS
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabIndicatorFullWidth="false"/>
 
-Shizuku:
-1) Install Shizuku. Start the service (ADB or root).
-2) In Shizuku, grant permission to One Stop.
-3) Open the app and use the toggle.
+    <FrameLayout
+        android:id="@+id/tab_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
-ashell (App Shell):
-1) Install aShell from Play Store.
-2) Run aShell with Shizuku service running.
-3) Execute:
-   pm grant com.onestop android.permission.WRITE_SECURE_SETTINGS"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-    </ScrollView>
+</LinearLayout>

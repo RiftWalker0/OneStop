@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import android.widget.ImageView;
+import android.content.Intent;
 import androidx.core.content.FileProvider;
 
 import java.io.File;
@@ -68,7 +70,13 @@ public class UpdatesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_updates);
 
-        Button btnWeb = findViewById(R.id.btn_open_github);
+        ImageView btnMenu = findViewById(com.onestop.R.id.btn_menu);
+if (btnMenu != null) { btnMenu.setOnClickListener(v -> {
+    Intent i = new Intent(this, MainActivity.class);
+    i.putExtra("open_drawer", true);
+    startActivity(i);
+});}
+Button btnWeb = findViewById(R.id.btn_open_github);
         Button btnDl = findViewById(R.id.btn_download_latest);
 
         btnWeb.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.latest_release_url)))));

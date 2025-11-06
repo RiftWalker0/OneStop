@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.Gravity;
 import android.widget.ImageView;
+import android.os.Handler;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +61,12 @@ public class MainActivity extends AppCompatActivity {
         toggle.setChecked(initialOn);
         updateStateText(initialOn);
         toggle.setOnToggleChanged(this::onToggle);
+
+            // If launched with request to open drawer from sub-pages
+            if (getIntent() != null && getIntent().getBooleanExtra("open_drawer", false)) {
+                drawer.post(() -> drawer.openDrawer(android.view.Gravity.START));
+                getIntent().removeExtra("open_drawer");
+            }
     }
 
     @Override protected void onResume() {
@@ -75,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
             toggle.setOnToggleChanged(null);
             toggle.setChecked(readBothEnabled(getContentResolver()));
             toggle.setOnToggleChanged(this::onToggle);
+
+            // If launched with request to open drawer from sub-pages
+            if (getIntent() != null && getIntent().getBooleanExtra("open_drawer", false)) {
+                drawer.post(() -> drawer.openDrawer(android.view.Gravity.START));
+                getIntent().removeExtra("open_drawer");
+            }
             updateStateText(toggle.isChecked());
             return;
         }
@@ -85,6 +98,12 @@ public class MainActivity extends AppCompatActivity {
             toggle.setOnToggleChanged(null);
             toggle.setChecked(actual);
             toggle.setOnToggleChanged(this::onToggle);
+
+            // If launched with request to open drawer from sub-pages
+            if (getIntent() != null && getIntent().getBooleanExtra("open_drawer", false)) {
+                drawer.post(() -> drawer.openDrawer(android.view.Gravity.START));
+                getIntent().removeExtra("open_drawer");
+            }
             updateStateText(actual);
         }
     }

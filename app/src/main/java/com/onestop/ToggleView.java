@@ -24,12 +24,23 @@ public class ToggleView extends View {
     public ToggleView(Context context, @Nullable AttributeSet attrs) { super(context, attrs); init(); }
     public ToggleView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) { super(context, attrs, defStyleAttr); init(); }
 
-    private void init() {
+    private int getThemeColor(int attr, int def) {
+    try {
+        android.util.TypedValue tv = new android.util.TypedValue();
+        if (getContext().getTheme().resolveAttribute(attr, tv, true)) {
+            if (tv.resourceId != 0) return getContext().getColor(tv.resourceId);
+            return tv.data;
+        }
+    } catch (Throwable ignored) {}
+    return def;
+}
+
+private void init() {
         setClickable(true);
         trackPaint.setStyle(Paint.Style.FILL);
         trackPaint.setColor(0x00000000);
         borderPaint.setStyle(Paint.Style.STROKE);
-        borderPaint.setColor(0xFFFFFFFF);
+        borderPaint.setColor(getThemeColor(com.onestop.R.attr.colorOnBackground, 0xFFFFFFFF));
         borderPaint.setStrokeWidth(8f);
         knobPaint.setStyle(Paint.Style.FILL);
         knobPaint.setColor(0xFFD50000);

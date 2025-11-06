@@ -6,6 +6,8 @@ import android.widget.RadioGroup;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import android.widget.ImageView;
+import android.content.Intent;
 
 public class ThemeActivity extends AppCompatActivity {
 
@@ -23,7 +25,13 @@ public class ThemeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theme);
 
-        RadioGroup group = findViewById(R.id.theme_group);
+        ImageView btnMenu = findViewById(com.onestop.R.id.btn_menu);
+if (btnMenu != null) { btnMenu.setOnClickListener(v -> {
+    Intent i = new Intent(this, MainActivity.class);
+    i.putExtra("open_drawer", true);
+    startActivity(i);
+});}
+RadioGroup group = findViewById(R.id.theme_group);
         RadioButton rbWhite = findViewById(R.id.rb_white);
         RadioButton rbMaterial = findViewById(R.id.rb_material);
         RadioButton rbBlack = findViewById(R.id.rb_black);

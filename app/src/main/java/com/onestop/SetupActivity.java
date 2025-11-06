@@ -3,6 +3,12 @@ package com.onestop;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.tabs.TabLayout;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+import android.content.Intent;
+import android.view.Gravity;
+import android.widget.ImageView;
 
 public class SetupActivity extends AppCompatActivity {
 
