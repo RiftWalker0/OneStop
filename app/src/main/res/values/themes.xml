@@ -1,34 +1,26 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base Material3 Theme -->
-    <style name="Theme.OneStop.Material3" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@android:color/black</item>
-    </style>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <style name="Theme_OneStop_Black" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:colorBackground">#000000</item>
+        <item name="colorSurface">#FF000000</item>
+        <item name="colorOnBackground">#FFFFFFFF</item>
+        <item name="colorOnSurface">#FFFFFFFF</item>
+        <item name="colorPrimary">#FFFFFF</item>
+        <item name="colorOnPrimary">#000000</item>
+        <item name="android:statusBarColor">#000000</item>
+        <item name="android:navigationBarColor">#000000</item>
+    <item name="android:windowBackground">#FF000000</item><item name="android:colorBackground">#FF000000</item><item name="android:textColorPrimary">#FFFFFFFF</item><item name="android:textColorPrimary">#FFFFFFFF</item></style>
 
-    <!-- Dynamic Material You -->
-    <style name="Theme.OneStop.Dynamic" parent="Theme.Material3.DynamicColors.DayNight.NoActionBar"/>
+    <style name="Theme_OneStop_White" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:colorBackground">#FFFFFF</item>
+        <item name="colorSurface">#FFFFFFFF</item>
+        <item name="colorOnBackground">#FF000000</item>
+        <item name="colorOnSurface">#FF000000</item>
+        <item name="colorPrimary">#000000</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="android:statusBarColor">#FFFFFF</item>
+        <item name="android:navigationBarColor">#FFFFFF</item>
+    <item name="android:windowBackground">#FFFFFFFF</item><item name="android:colorBackground">#FFFFFFFF</item><item name="android:textColorPrimary">#FF000000</item><item name="android:textColorPrimary">#FF000000</item></style>
 
-    <!-- Pitch Black -->
-    <style name="Theme.OneStop.Black" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorSurface">@android:color/black</item>
-        <item name="colorSurfaceContainer">@android:color/black</item>
-        <item name="android:colorBackground">@android:color/black</item>
-        <item name="colorOnBackground">@android:color/white</item>
-        <item name="colorOnSurface">@android:color/white</item>
-        <item name="toolbarStyle">@style/Widget.OneStop.Toolbar</item>
-    </style>
-
-    <!-- Pure White -->
-    <style name="Theme.OneStop.White" parent="Theme.Material3.Light.NoActionBar">
-        <item name="colorSurface">@android:color/white</item>
-        <item name="colorSurfaceContainer">@android:color/white</item>
-        <item name="android:colorBackground">@android:color/white</item>
-        <item name="colorOnBackground">@android:color/black</item>
-        <item name="colorOnSurface">@android:color/black</item>
-        <item name="toolbarStyle">@style/Widget.OneStop.Toolbar</item>
-    </style>
-
-    <style name="Widget.OneStop.Toolbar" parent="Widget.Material3.Toolbar">
-        <item name="titleCentered">true</item>
-    </style>
+    <style name="Theme_OneStop_MaterialYou" parent="Theme.Material3.DayNight.NoActionBar" />
 </resources>

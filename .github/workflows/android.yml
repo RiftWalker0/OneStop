@@ -1,41 +1,36 @@
-name: Android CI
-
+name: Android CI (APK)
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  push: { branches: [ "main" ] }
+  pull_request: { branches: [ "main" ] }
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
+      - uses: actions/setup-java@v4
         with:
-          distribution: temurin
+          distribution: 'temurin'
           java-version: '17'
-
-      # Generate a proper Gradle Wrapper (adds gradlew, gradlew.bat and gradle/wrapper JAR)
-      - name: Generate Gradle Wrapper (Gradle 8.7)
-        uses: gradle/gradle-build-action@v2
+          cache: 'gradle'
+      - uses: android-actions/setup-android@v3
+      - run: yes | sdkmanager --licenses
+      - run: sdkmanager "platforms;android-34" "build-tools;34.0.0" "platform-tools"
+      - uses: gradle/actions/setup-gradle@v4
+        with: { cache-read-only: false }
+      - name: Ensure wrapper
+        run: |
+          if [ ! -x "./gradlew" ]; then
+            curl -sLo gradle-8.7-bin.zip https://services.gradle.org/distributions/gradle-8.7-bin.zip
+            unzip -q gradle-8.7-bin.zip
+            ./gradle-8.7/bin/gradle wrapper --gradle-version 8.7
+          fi
+          chmod +x gradlew
+      - name: Build APK
+        run: ./gradlew --stacktrace --info --no-daemon :app:assembleDebug
+      - uses: actions/upload-artifact@v4
         with:
-          gradle-version: 8.7
-          arguments: wrapper
-
-      - name: Make wrapper executable
-        run: chmod +x ./gradlew
-
-      - name: Set up Gradle caching
-        uses: gradle/actions/setup-gradle@v4
-
-      - name: Build Debug APK
-        run: ./gradlew :app:assembleDebug --stacktrace
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-debug-apk
-          path: app/build/outputs/apk/debug/*.apk
+          name: one-stop-debug-apk-v1.1.5
+          path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error

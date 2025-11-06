@@ -1,32 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:colorBackground">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
-    android:gravity="center_horizontal">
-
-    <include layout="@layout/include_toolbar"/>
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="About"
-        android:gravity="center"
-        android:padding="16dp"
-        android:textAppearance="@style/TextAppearance.Material3.TitleLarge"/>
-
-    <TextView
-    android:id="@+id/tvVersion"
-    android:layout_width="wrap_content"
+    android:orientation="vertical"
+        android:gravity="center_horizontal"
+    android:background="?android:colorBackground"
+    android:padding="16dp">
+<LinearLayout
+    android:id="@+id/top_bar"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="@string/version_label"/>
-<TextView
-    android:id="@+id/tvDev"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/developer_credit"
-    android:layout_marginTop="8dp"/>
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:gravity="center_vertical">
 
+    <ImageView
+        android:id="@+id/btn_menu"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_menu"
+        android:tint="?attr/colorOnBackground"
+        android:contentDescription="Menu" />
 
+    <Space
+        android:layout_width="32dp"
+        android:layout_height="32dp"/>
 </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="16sp"
+        android:layout_marginBottom="6dp"/>
+
+    <TextView
+        android:id="@+id/tv_developer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/about"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="16sp"/>
+</LinearLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            android:background="?android:colorBackground"
+            app:menu="@menu/drawer_menu" />
+    </androidx.drawerlayout.widget.DrawerLayout>
