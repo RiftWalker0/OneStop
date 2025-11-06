@@ -1,8 +1,16 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:colorBackground">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+        android:gravity="center_horizontal"
     android:background="?android:colorBackground"
     android:padding="16dp">
 <LinearLayout
@@ -38,14 +46,6 @@
 </LinearLayout>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Updates"
-        android:textColor="?attr/colorOnBackground"
-        android:textSize="22sp"
-        android:layout_marginBottom="16dp"/>
-
     <Button
         android:id="@+id/btn_open_github"
         android:layout_width="wrap_content"
@@ -59,3 +59,13 @@
         android:text="@string/download_latest"
         android:layout_marginTop="12dp"/>
 </LinearLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            android:background="?android:colorBackground"
+            app:menu="@menu/drawer_menu" />
+    </androidx.drawerlayout.widget.DrawerLayout>

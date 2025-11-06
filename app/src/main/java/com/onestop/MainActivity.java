@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         btnMenu.setOnClickListener(v -> drawer.openDrawer(Gravity.START));
 
         NavigationView nav = findViewById(R.id.nav_view);
+        if (nav != null) { nav.setCheckedItem(R.id.nav_home); }
         nav.setNavigationItemSelectedListener(item -> {
             drawer.closeDrawers();
             int id = item.getItemId();

@@ -1,4 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_home"   android:title="Home"   android:icon="@drawable/ic_menu"/>
     <item android:id="@+id/nav_setup"   android:title="@string/menu_setup"   android:icon="@drawable/ic_setup"/>
     <item android:id="@+id/nav_theme"   android:title="@string/menu_theme"   android:icon="@drawable/ic_theme"/>
     <item android:id="@+id/nav_updates" android:title="@string/menu_updates" android:icon="@drawable/ic_update"/>
