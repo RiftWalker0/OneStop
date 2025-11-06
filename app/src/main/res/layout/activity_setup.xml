@@ -1,95 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/drawer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?android:colorBackground">
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="?android:colorBackground"
-    android:padding="16dp">
+    android:background="?attr/colorBackground">
 
-    <!-- Top bar with menu -->
     <LinearLayout
-        android:id="@+id/top_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:gravity="center_vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="?attr/colorBackground">
 
-        <ImageView
-            android:id="@+id/btn_menu"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_menu"
-            android:tint="?attr/colorOnBackground"
-            android:contentDescription="Menu" />
+        <include
+            android:id="@id/top_bar"
+            layout="@layout/view_top_bar"
+            android:layout_marginBottom="12dp" />
 
-        <TextView
-            android:id="@+id/title_generic"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/setup"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="?attr/colorOnBackground"
-            android:gravity="center"/>
-
-        <Space
-            android:layout_width="32dp"
-            android:layout_height="32dp"/>
-    </LinearLayout>
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabIndicatorFullWidth="false"/>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <LinearLayout
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="12dp">
+            android:background="?attr/colorSurface"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            app:tabIndicatorColor="?attr/colorPrimary"
+            app:tabIndicatorFullWidth="false"
+            app:tabSelectedTextColor="?attr/colorOnSurface"
+            app:tabTextColor="?attr/colorOnSurface" />
 
-            <TextView
-                android:id="@+id/tv_pc"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="16dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="?attr/colorOnBackground"
-                android:textSize="16sp"
-                android:text="Grant WRITE_SECURE_SETTINGS via ADB on PC:\n\n1) Enable Developer options and USB debugging.\n2) Connect phone to PC with USB.\n3) Run:\n   adb shell pm grant com.onestop android.permission.WRITE_SECURE_SETTINGS\n\nDisable permission monitoring (if present):\n  Settings > Developer options > Disable permission monitoring."/>
+                android:orientation="vertical"
+                android:paddingBottom="24dp">
 
-            <TextView
-                android:id="@+id/tv_mobile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:textColor="?attr/colorOnBackground"
-                android:textSize="16sp"
-                android:text="Grant via Mobile (aShell/terminal with adb over network):\n\n1) Ensure adb over network/sh wireless debugging is available.\n2) Execute:\n   pm grant com.onestop android.permission.WRITE_SECURE_SETTINGS\n\nDisable permission monitoring (if present):\n  Settings > Developer options > Disable permission monitoring."/>
-        </LinearLayout>
-    </ScrollView>
+                <TextView
+                    android:id="@+id/tv_pc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="2dp"
+                    android:text="Grant WRITE_SECURE_SETTINGS via ADB on PC:\n\n1) Enable Developer options and USB debugging.\n2) Connect phone to PC with USB.\n3) Run:\n   adb shell pm grant com.onestop android.permission.WRITE_SECURE_SETTINGS\n\nDisable permission monitoring (if present):\n  Settings > Developer options > Disable permission monitoring."
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="16dp" />
 
-</LinearLayout>
+                <TextView
+                    android:id="@+id/tv_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="2dp"
+                    android:text="Grant via Mobile (aShell/terminal with adb over network):\n\n1) Ensure adb over network/sh wireless debugging is available.\n2) Execute:\n   pm grant com.onestop android.permission.WRITE_SECURE_SETTINGS\n\nDisable permission monitoring (if present):\n  Settings > Developer options > Disable permission monitoring."
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
 
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:fitsSystemWindows="true"
-            android:background="?android:colorBackground"
-            app:menu="@menu/drawer_menu" />
-    </androidx.drawerlayout.widget.DrawerLayout>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="?attr/colorSurface"
+        android:fitsSystemWindows="true"
+        app:menu="@menu/drawer_menu" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
