@@ -5,12 +5,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
 public class UpdatesActivity extends AppCompatActivity {
@@ -48,15 +48,20 @@ public class UpdatesActivity extends AppCompatActivity {
             });
         }
 
-        ImageView btnMenu = findViewById(R.id.btn_menu);
-        if (btnMenu != null) {
-            btnMenu.setOnClickListener(v -> { if (drawer != null) drawer.openDrawer(Gravity.START); });
+        MaterialToolbar topBar = findViewById(R.id.top_bar);
+        if (topBar != null) {
+            topBar.setTitle(R.string.title_updates);
+            topBar.setNavigationOnClickListener(v -> {
+                if (drawer != null) {
+                    drawer.openDrawer(Gravity.START);
+                }
+            });
         }
 
         Button btn = findViewById(R.id.btn_download_latest);
         if (btn != null) {
             btn.setOnClickListener(v -> {
-                Uri uri = Uri.parse("https://github.com/RiftWalker0/OneStop/releases/latest");
+                Uri uri = Uri.parse(getString(R.string.latest_release_url));
                 Intent i = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(i);
             });
