@@ -3,13 +3,13 @@ package com.onestop;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
@@ -48,9 +48,14 @@ public class SetupActivity extends AppCompatActivity {
             });
         }
 
-        ImageView btnMenu = findViewById(R.id.btn_menu);
-        if (btnMenu != null) {
-            btnMenu.setOnClickListener(v -> { if (drawer != null) drawer.openDrawer(Gravity.START); });
+        MaterialToolbar topBar = findViewById(R.id.top_bar);
+        if (topBar != null) {
+            topBar.setTitle(R.string.title_setup);
+            topBar.setNavigationOnClickListener(v -> {
+                if (drawer != null) {
+                    drawer.openDrawer(Gravity.START);
+                }
+            });
         }
 
         TabLayout tabs = findViewById(R.id.tab_layout);
