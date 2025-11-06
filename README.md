@@ -1,25 +1,19 @@
-# OneStop AndroidX Fix Patch
+# OneStop CI: Auto-Generate Gradle Wrapper
 
-This patch enables **AndroidX** and **Jetifier** for your build. Drop the included
-`gradle.properties` at the root of your project (next to `settings.gradle`).
-A GitHub Actions workflow (`.github/workflows/build.yml`) is also included and
-uses `gradle/actions/setup-gradle@v3` (no deprecations).
+This bundle adds:
+- `gradle.properties` with AndroidX + Jetifier enabled
+- GitHub Actions workflow that **first generates the Gradle Wrapper**
+  (`gradle wrapper --gradle-version 8.7`) and then builds your APK.
 
-## Quick apply
-
-```bash
-# from project root
-cp gradle.properties gradle.properties.bak || true
-cp OneStop-AndroidX-Fix/gradle.properties ./gradle.properties
-mkdir -p .github/workflows
-cp OneStop-AndroidX-Fix/.github/workflows/build.yml .github/workflows/build.yml
-```
-
-Then run:
+### Why this approach?
+We can't include the binary `gradle/wrapper/gradle-wrapper.jar` here, so the
+workflow provisions Gradle and creates the wrapper on CI before building.
+Locally, you can run the same once:
 
 ```bash
-./gradlew --no-daemon :app:assembleDebug
+# using a system Gradle 8.7 (or via SDKMAN/asdf)
+gradle wrapper --gradle-version 8.7
+./gradlew :app:assembleDebug
 ```
 
-If you still see AndroidX errors, ensure there are **no** support libraries in
-your `dependencies {}` (everything should be `androidx.*`).
+Place these files at the **repo root** and push.

@@ -1,4 +1,4 @@
-name: Build Debug APK
+name: Build Debug APK (Generate Wrapper then Build)
 
 on:
   workflow_dispatch:
@@ -18,18 +18,22 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-
-      - name: Enable AndroidX in gradle.properties (safety)
+      - name: Ensure AndroidX flags
         run: |
           echo "android.useAndroidX=true" >> gradle.properties
           echo "android.enableJetifier=true" >> gradle.properties
 
+      # Use Gradle without wrapper to GENERATE the wrapper into the repo
+      - name: Generate Gradle Wrapper (8.7)
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: 8.7
+          arguments: wrapper --gradle-version 8.7
+
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: Assemble Debug
+      - name: Build Debug APK
         run: ./gradlew --no-daemon :app:assembleDebug
 
       - name: Upload APK
