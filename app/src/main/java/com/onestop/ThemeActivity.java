@@ -4,13 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
 public class ThemeActivity extends AppCompatActivity {
@@ -48,19 +48,19 @@ public class ThemeActivity extends AppCompatActivity {
             });
         }
 
-        ImageView btnMenu = findViewById(R.id.btn_menu);
-        if (btnMenu != null) {
-            btnMenu.setOnClickListener(v -> { if (drawer != null) drawer.openDrawer(Gravity.START); });
+        MaterialToolbar topBar = findViewById(R.id.top_bar);
+        if (topBar != null) {
+            topBar.setTitle(R.string.title_theme);
+            topBar.setNavigationOnClickListener(v -> {
+                if (drawer != null) {
+                    drawer.openDrawer(Gravity.START);
+                }
+            });
         }
 
-        // Theme radios (IDs may vary; resolve safely by name)
-        int idWhite = getResources().getIdentifier("rb_white", "id", getPackageName());
-        int idMy    = getResources().getIdentifier("rb_material_you", "id", getPackageName());
-        int idBlack = getResources().getIdentifier("rb_black", "id", getPackageName());
-
-        RadioButton rbWhite = (idWhite != 0) ? findViewById(idWhite) : null;
-        RadioButton rbMy    = (idMy != 0)    ? findViewById(idMy)    : null;
-        RadioButton rbBlack = (idBlack != 0) ? findViewById(idBlack) : null;
+        RadioButton rbWhite = findViewById(R.id.rb_white);
+        RadioButton rbMy    = findViewById(R.id.rb_material_you);
+        RadioButton rbBlack = findViewById(R.id.rb_black);
 
         int mode = Prefs.getTheme(this);
         if (rbWhite != null) rbWhite.setChecked(mode == 0);
