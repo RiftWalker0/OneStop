@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="app_name">One Stop</string>
     <string name="debug_on">Debugging On</string>
@@ -15,4 +16,4 @@
     <string name="version_label">Version</string>
     <string name="developer_note">Developer: RiftWalker / Insomniac</string>
     <string name="latest_release_url">https://github.com/RiftWalker0/OneStop/releases/latest</string>
-</resources>
+<string name="menu">Menu</string><string name="updates">Updates</string><string name="updates_info">You can download the latest release from GitHub.</string></resources>
