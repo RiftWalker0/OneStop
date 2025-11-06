@@ -14,7 +14,7 @@
     <string name="go_to_github">Go to GitHub</string>
     <string name="download_latest">Download Latest</string>
     <string name="version_label">Version</string>
-    <string name="developer_note">Developer: RiftWalker / Insomniac</string>
+    <string name="developer_note">Developer: RiftWalker/Insomniac</string>
     <string name="latest_release_url">https://github.com/RiftWalker0/OneStop/releases/latest</string>
     <string name="menu">Menu</string>
     <string name="updates">Updates</string>
