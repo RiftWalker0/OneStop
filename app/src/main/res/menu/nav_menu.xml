@@ -1,7 +1,0 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/nav_home" android:title="@string/home" android:icon="@drawable/ic_home"/>
-    <item android:id="@+id/nav_setup" android:title="@string/setup" android:icon="@drawable/ic_setup"/>
-    <item android:id="@+id/nav_theme" android:title="@string/themes" android:icon="@drawable/ic_theme"/>
-    <item android:id="@+id/nav_updates" android:title="@string/updates" android:icon="@drawable/ic_updates"/>
-    <item android:id="@+id/nav_about" android:title="@string/about" android:icon="@drawable/ic_about"/>
-</menu>

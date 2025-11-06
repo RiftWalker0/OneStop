@@ -1,7 +1,8 @@
-<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.MaterialToolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="56dp"
+    android:layout_height="wrap_content"
     android:background="?attr/colorSurface"
-    android:theme="@style/ThemeOverlay.Material3.ActionBar">
-</androidx.appcompat.widget.Toolbar>
+    android:theme="?attr/actionBarTheme"/>
