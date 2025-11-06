@@ -54,9 +54,12 @@ public class ThemeActivity extends AppCompatActivity {
         }
 
         // Theme choice radios (if present): rb_white, rb_material_you, rb_black
-        RadioButton rbWhite = findViewById(R.id.rb_white);
-        RadioButton rbMy = findViewById(R.id.rb_material_you);
-        RadioButton rbBlack = findViewById(R.id.rb_black);
+        int idWhite = getResources().getIdentifier("rb_white", "id", getPackageName());
+int idMy = getResources().getIdentifier("rb_material_you", "id", getPackageName());
+int idBlack = getResources().getIdentifier("rb_black", "id", getPackageName());
+RadioButton rbWhite = (idWhite != 0) ? findViewById(idWhite) : null;
+RadioButton rbMy = (idMy != 0) ? findViewById(idMy) : null;
+RadioButton rbBlack = (idBlack != 0) ? findViewById(idBlack) : null;
         if (rbWhite != null && rbMy != null && rbBlack != null) {
             int mode = Prefs.getTheme(this);
             rbWhite.setChecked(mode == 0);
