@@ -1,0 +1,21 @@
+<resources>
+    <!-- Pitch Black (default) -->
+    <style name="Theme_OneStop_Black" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/pure_black</item>
+        <item name="android:statusBarColor">@color/pure_black</item>
+        <item name="android:navigationBarColor">@color/pure_black</item>
+        <item name="android:forceDarkAllowed">false</item>
+        <item name="android:colorBackground">@color/pure_black</item>
+    </style>
+
+    <!-- Pure White -->
+    <style name="Theme_OneStop_White" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/pure_white</item>
+        <item name="android:statusBarColor">@color/pure_white</item>
+        <item name="android:navigationBarColor">@color/pure_white</item>
+        <item name="android:colorBackground">@color/pure_white</item>
+    </style>
+
+    <!-- Material You (dynamic colors applied at runtime) -->
+    <style name="Theme_OneStop_MaterialYou" parent="Theme.MaterialComponents.DayNight.NoActionBar"/>
+</resources>
