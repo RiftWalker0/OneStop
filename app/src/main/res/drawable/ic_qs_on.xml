@@ -1,0 +1,10 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp" android:height="24dp"
+    android:viewportWidth="24" android:viewportHeight="24">
+    <!-- Dark track (ON) -->
+    <path android:fillColor="#FF202124"
+        android:pathData="M5,8h14a4,4 0 0,1 0,8h-14a4,4 0 0,1 0,-8z"/>
+    <!-- knob right: green -->
+    <path android:fillColor="#FF00C853"
+        android:pathData="M15,12a4,4 0 1,1 -0.001,0z"/>
+</vector>
