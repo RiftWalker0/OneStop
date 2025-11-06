@@ -29,7 +29,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/title_theme"
+            android:text="@string/themes"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="?attr/colorOnBackground"
@@ -43,13 +43,7 @@
         android:paddingTop="16dp"
         android:paddingBottom="8dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="QS Tile Icon Style"
-            android:textStyle="bold"
-            android:textColor="?attr/colorOnBackground"
-            android:textSize="16sp"/>
+        
     </LinearLayout>
 
 </LinearLayout>
@@ -98,13 +92,7 @@
         android:paddingTop="16dp"
         android:paddingBottom="8dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="QS Tile Icon Style"
-            android:textStyle="bold"
-            android:textColor="?attr/colorOnBackground"
-            android:textSize="16sp"/>
+        
 
 
     </LinearLayout>
