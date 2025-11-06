@@ -1,31 +1,45 @@
-
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" tools:ignore="ProtectedPermissions"/>
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
     <application
-        android:name=".OneStopApp"
         android:allowBackup="true"
         android:label="One Stop"
+        android:icon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
         android:theme="@style/Theme.OneStop.MaterialYou">
-        <activity android:name=".MainActivity" android:exported="true">
+
+        <!-- Main launcher -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ThemeActivity" android:exported="false"/>
-        <activity android:name=".SetupActivity" android:exported="false"/>
-        <activity android:name=".UpdatesActivity" android:exported="false"/>
-        <activity android:name=".AboutActivity" android:exported="false"/>
 
+        <!-- Other pages -->
+        <activity android:name=".SetupActivity" android:exported="false" />
+        <activity android:name=".ThemeActivity" android:exported="false" />
+        <activity android:name=".UpdatesActivity" android:exported="false" />
+        <activity android:name=".AboutActivity" android:exported="false" />
+
+        <!-- QS Tile service (Android 7.0+) -->
         <service
             android:name=".tile.OneStopTileService"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
+
+        <!-- FileProvider for APK install flow -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -35,5 +49,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
     </application>
 </manifest>
