@@ -12,7 +12,7 @@
     <style name="Theme.OneStop.Black" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorSurface">@android:color/black</item>
         <item name="colorSurfaceContainer">@android:color/black</item>
-        <item name="colorBackground">@android:color/black</item>
+        <item name="android:colorBackground">@android:color/black</item>
         <item name="colorOnBackground">@android:color/white</item>
         <item name="colorOnSurface">@android:color/white</item>
         <item name="toolbarStyle">@style/Widget.OneStop.Toolbar</item>
@@ -22,7 +22,7 @@
     <style name="Theme.OneStop.White" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorSurface">@android:color/white</item>
         <item name="colorSurfaceContainer">@android:color/white</item>
-        <item name="colorBackground">@android:color/white</item>
+        <item name="android:colorBackground">@android:color/white</item>
         <item name="colorOnBackground">@android:color/black</item>
         <item name="colorOnSurface">@android:color/black</item>
         <item name="toolbarStyle">@style/Widget.OneStop.Toolbar</item>
