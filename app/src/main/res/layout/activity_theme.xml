@@ -129,28 +129,7 @@
             android:textColor="?attr/colorOnBackground"
             android:textSize="16sp"/>
 
-        <RadioGroup
-            android:id="@+id/rg_qs_style"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/rb_qs_mono"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Monochrome"
-                android:textColor="?attr/colorOnBackground"
-                android:checked="true"/>
-
-            <RadioButton
-                android:id="@+id/rb_qs_color"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Colored"
-                android:layout_marginStart="24dp"
-                android:textColor="?attr/colorOnBackground"/>
-        </RadioGroup>
     </LinearLayout>
 
 </LinearLayout>
