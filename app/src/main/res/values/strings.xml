@@ -6,16 +6,17 @@
     <string name="updates">Updates</string>
     <string name="about">About</string>
     <string name="menu">Menu</string>
-    <string name="toggle_on">Debugging On</string>
-    <string name="toggle_off">Debugging Off</string>
-    <string name="latest_release">Go to GitHub</string>
+    <string name="updates_info">Download and install the latest release from GitHub.</string>
     <string name="download_latest">Download Latest</string>
-    <string name="updates_info">Tap below to check for updates or download the latest build.</string>
+    <string name="go_to_github">Go to GitHub</string>
+    <string name="debug_on">Debugging On</string>
+    <string name="debug_off">Debugging Off</string>
+    <string name="pure_white">Pure White</string>
+    <string name="pitch_black">Pitch Black</string>
+    <string name="material_you">Material You</string>
     <string name="version_label">Version</string>
-    <string name="built_by">Developed by RiftWalker/Insomniac</string>
+    <string name="build_label">Build</string>
+    <string name="developer">Developed by RiftWalker/Insomniac</string>
     <string name="pc">PC</string>
     <string name="mobile">Mobile</string>
-    <string name="theme_white">Pure White</string>
-    <string name="theme_black">Pitch Black</string>
-    <string name="theme_material">Material You</string>
 </resources>

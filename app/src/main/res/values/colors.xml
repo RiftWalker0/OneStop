@@ -1,6 +1,10 @@
 <resources>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="green_on">#26A269</color>
-    <color name="red_off">#D32F2F</color>
+    <color name="surface_dark">#121212</color>
+    <color name="on_surface_dark">#FFFFFF</color>
+    <color name="surface_light">#FFFFFF</color>
+    <color name="on_surface_light">#000000</color>
+    <color name="red">#FF3B30</color>
+    <color name="green">#34C759</color>
 </resources>
