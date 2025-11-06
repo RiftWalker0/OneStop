@@ -1,33 +1,23 @@
-# Fix: file_paths.xml parsing error
+# Fix: Adaptive icon XML prolog/BOM issue
 
-**Problem**
+Error:
 ```
-[Fatal Error] file_paths.xml:2:6: The processing instruction target matching "[xX][mM][lL]" is not allowed.
+The processing instruction target matching "[xX][mM][lL]" is not allowed.
 ```
-This happens when an XML prolog like `<?xml version="1.0"?>` appears with any character (BOM/whitespace)
-before it, or when multiple `<?xml ...?>` lines exist.
+This happens when `res/mipmap-anydpi-v26/ic_launcher.xml` (or `ic_launcher_round.xml`) contains a BOM or an XML prolog not at byte 0.
 
-**Solution**
-Use this `res/xml/file_paths.xml` *without* any XML prolog and ensure UTF-8 (no BOM).
+## What this patch provides
+- Clean adaptive icon XMLs (no `<?xml ...?>`, no BOM)
+- A simple vector foreground (`@drawable/ic_launcher_foreground`) shaped like a radio button
+- A black background color at `@color/ic_launcher_background`
 
-**Where to place**
-`app/src/main/res/xml/file_paths.xml`
+## Where to place
+- `app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml`
+- `app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml`
+- `app/src/main/res/drawable/ic_launcher_foreground.xml`
+- `app/src/main/res/values/ic_launcher_background.xml`
 
-**Manifest reminder**
-Make sure your `AndroidManifest.xml` has the `FileProvider` configured to use this file:
-```xml
-<provider
-    android:name="androidx.core.content.FileProvider"
-    android:authorities="${applicationId}.provider"
-    android:exported="false"
-    android:grantUriPermissions="true">
-    <meta-data
-        android:name="android.support.FILE_PROVIDER_PATHS"
-        android:resource="@xml/file_paths" />
-</provider>
-```
-
-**Rebuild**
+## Rebuild
 ```bash
 ./gradlew --no-daemon :app:assembleDebug
 ```
