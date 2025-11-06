@@ -40,7 +40,7 @@ private void init() {
         trackPaint.setStyle(Paint.Style.FILL);
         trackPaint.setColor(0x00000000);
         borderPaint.setStyle(Paint.Style.STROKE);
-        borderPaint.setColor(getThemeColor(androidx.appcompat.R.attr.colorOnBackground, 0xFFFFFFFF));
+        borderPaint.setColor(getThemeColor(com.google.android.material.R.attr.colorOnBackground, 0xFFFFFFFF));
         borderPaint.setStrokeWidth(8f);
         knobPaint.setStyle(Paint.Style.FILL);
         knobPaint.setColor(0xFFD50000);
