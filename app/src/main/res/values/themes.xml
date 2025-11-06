@@ -1,17 +1,34 @@
-
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.OneStop" parent="Theme.Material3.Dark.NoActionBar">
-        <item name="android:statusBarColor" tools:targetApi="21">@android:color/transparent</item>
-        <item name="android:navigationBarColor" tools:targetApi="21">@android:color/black</item>
+    <!-- Base Material3 Theme -->
+    <style name="Theme.OneStop.Material3" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
     </style>
-    <style name="Theme.OneStop.Black" parent="Theme.Material3.Dark.NoActionBar">
-        <item name="android:windowBackground">@color/black</item>
-        <item name="colorSurface">@color/black</item>
-        <item name="colorOnSurface">@color/white</item>
+
+    <!-- Dynamic Material You -->
+    <style name="Theme.OneStop.Dynamic" parent="Theme.Material3.DynamicColors.DayNight.NoActionBar"/>
+
+    <!-- Pitch Black -->
+    <style name="Theme.OneStop.Black" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorSurface">@android:color/black</item>
+        <item name="colorSurfaceContainer">@android:color/black</item>
+        <item name="colorBackground">@android:color/black</item>
+        <item name="colorOnBackground">@android:color/white</item>
+        <item name="colorOnSurface">@android:color/white</item>
+        <item name="toolbarStyle">@style/Widget.OneStop.Toolbar</item>
     </style>
+
+    <!-- Pure White -->
     <style name="Theme.OneStop.White" parent="Theme.Material3.Light.NoActionBar">
-        <item name="android:windowBackground">@color/white</item>
-        <item name="colorSurface">@color/white</item>
-        <item name="colorOnSurface">@color/black</item>
+        <item name="colorSurface">@android:color/white</item>
+        <item name="colorSurfaceContainer">@android:color/white</item>
+        <item name="colorBackground">@android:color/white</item>
+        <item name="colorOnBackground">@android:color/black</item>
+        <item name="colorOnSurface">@android:color/black</item>
+        <item name="toolbarStyle">@style/Widget.OneStop.Toolbar</item>
+    </style>
+
+    <style name="Widget.OneStop.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="titleCentered">true</item>
     </style>
 </resources>

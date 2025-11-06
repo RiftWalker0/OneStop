@@ -1,51 +1,39 @@
-
 package com.onestop;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.widget.TextView;
-import android.widget.ToggleButton;
-import androidx.drawerlayout.widget.DrawerLayout;
-import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.button.MaterialButton;
 
 public class MainActivity extends BaseActivity {
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MaterialToolbar tb = findViewById(R.id.toolbar);
-        tb.setTitle(getString(R.string.home));
-        tb.setNavigationIcon(androidx.appcompat.R.drawable.abc_ic_menu_overflow_material);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        tb.setNavigationOnClickListener(v -> drawer.open());
+        MaterialButton btn = findViewById(R.id.btnToggle);
+        TextView tv = findViewById(R.id.tvState);
 
-        NavigationView nav = findViewById(R.id.nav_view);
-        nav.setNavigationItemSelectedListener(item -> {
-            drawer.close();
-            int id = item.getItemId();
-            if (id == R.id.nav_setup) startActivity(new Intent(this, SetupActivity.class));
-            else if (id == R.id.nav_theme) startActivity(new Intent(this, ThemeActivity.class));
-            else if (id == R.id.nav_updates) startActivity(new Intent(this, UpdatesActivity.class));
-            else if (id == R.id.nav_about) startActivity(new Intent(this, AboutActivity.class));
-            return true;
-        });
+        boolean on = Prefs.isDebug(this);
+        updateUi(btn, tv, on);
 
-        ToggleButton toggle = findViewById(R.id.toggle);
-        TextView tv = findViewById(R.id.tv_state);
-
-        boolean saved = Prefs.getState(this);
-        toggle.setChecked(saved);
-        tv.setText(saved ? R.string.toggle_on : R.string.toggle_off);
-
-        toggle.setOnCheckedChangeListener((b, on) -> {
-            Prefs.setState(this, on);
-            tv.setText(on ? R.string.toggle_on : R.string.toggle_off);
+        btn.setOnClickListener(v -> {
+            boolean now = !Prefs.isDebug(this);
+            Prefs.setDebug(this, now);
+            // Attempt to write secure settings (requires granted permission)
             try {
-                Settings.Global.putInt(getContentResolver(), "development_settings_enabled", on ? 1 : 0);
-                Settings.Global.putInt(getContentResolver(), "adb_enabled", on ? 1 : 0);
-            } catch (Exception ignored) {}
+                Settings.Global.putInt(getContentResolver(), Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, now ? 1 : 0);
+                Settings.Global.putInt(getContentResolver(), Settings.Global.ADB_ENABLED, now ? 1 : 0);
+            } catch (Throwable ignored){}
+            updateUi(btn, tv, now);
+            com.onestop.tile.OneStopTileService.requestTileUpdate(this);
         });
+
+        findViewById(R.id.title).setOnClickListener(v -> startActivity(new Intent(this, ThemeActivity.class)));
+    }
+
+    private void updateUi(MaterialButton btn, TextView tv, boolean on){
+        btn.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getColor(on ? R.color.green_on : R.color.red_off)));
+        tv.setText(on ? R.string.debug_on : R.string.debug_off);
     }
 }

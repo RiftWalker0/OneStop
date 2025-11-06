@@ -1,4 +1,5 @@
 name: Android CI
+
 on:
   push:
     branches: [ main ]
@@ -20,12 +21,12 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Generate Gradle wrapper (if missing)
+      - name: Ensure Gradle wrapper
         run: |
           if [ ! -f ./gradlew ]; then
             gradle wrapper --gradle-version 8.7
-            chmod +x ./gradlew
           fi
+          chmod +x ./gradlew
 
       - name: Build Debug APK
         run: ./gradlew :app:assembleDebug --stacktrace
