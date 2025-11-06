@@ -1,80 +1,48 @@
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawer_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?android:colorBackground">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="?attr/colorBackground">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?android:colorBackground">
+    <include
+        android:id="@+id/header"
+        layout="@layout/include_header"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-        <LinearLayout
-            android:id="@+id/top_bar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp"
-            android:gravity="center_vertical"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:background="?android:colorBackground">
 
-            <ImageView
-                android:id="@+id/btn_menu"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_menu"
-                android:tint="?attr/colorOnBackground"
-                android:contentDescription="Menu" />
+<LinearLayout
+    android:layout_width="0dp" android:layout_height="wrap_content"
+    android:orientation="vertical" android:gravity="center"
+    app:layout_constraintTop_toBottomOf='@id/header'
+    app:layout_constraintStart_toStartOf='parent'
+    app:layout_constraintEnd_toEndOf='parent'
+    android:padding='24dp'>
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="One Stop"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="?attr/colorOnBackground"
-                android:gravity="center"/>
+    <TextView
+        android:id='@+id/tv_state'
+        android:text='@string/debug_off'
+        android:textColor='?attr/colorOnBackground'
+        android:textSize='18sp'
+        android:layout_width='wrap_content' android:layout_height='wrap_content'
+        android:paddingBottom='16dp'/>
 
-            <Space
-                android:layout_width="32dp"
-                android:layout_height="32dp"/>
-        </LinearLayout>
+    <Switch
+        android:id='@+id/sw_toggle'
+        android:layout_width='wrap_content' android:layout_height='wrap_content'/>
+</LinearLayout>
 
-        <com.onestop.ToggleView
-            android:id="@+id/toggleView"
-            android:layout_width="300dp"
-            android:layout_height="140dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+<LinearLayout
+    android:layout_width="0dp" android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:padding="24dp">
 
-        <TextView
-            android:id="@+id/state"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/home"
-            android:textSize="18sp"
-            android:textColor="?attr/colorOnBackground"
-            app:layout_constraintTop_toBottomOf="@id/toggleView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp"/>
+    <Button android:id='@+id/nav_setup' android:text='@string/setup' android:layout_width='match_parent' android:layout_height='wrap_content'/>
+    <Button android:id='@+id/nav_theme' android:text='@string/themes' android:layout_width='match_parent' android:layout_height='wrap_content' android:layout_marginTop='8dp'/>
+    <Button android:id='@+id/nav_updates' android:text='@string/updates' android:layout_width='match_parent' android:layout_height='wrap_content' android:layout_marginTop='8dp'/>
+    <Button android:id='@+id/nav_about' android:text='@string/about' android:layout_width='match_parent' android:layout_height='wrap_content' android:layout_marginTop='8dp'/>
+</LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.google.android.material.navigation.NavigationView
-            app:menu="@menu/drawer_menu"
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        android:background="?android:colorBackground" />
-
-</androidx.drawerlayout.widget.DrawerLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
