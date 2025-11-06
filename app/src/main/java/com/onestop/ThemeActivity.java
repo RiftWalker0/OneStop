@@ -80,17 +80,12 @@ RadioButton rbBlack = (idBlack != 0) ? findViewById(idBlack) : null;
         }
 
         // QS icon style radios
-        RadioGroup rg = findViewById(R.id.rg_qs_style);
-        RadioButton rbMono = findViewById(R.id.rb_qs_mono);
-        RadioButton rbColor = findViewById(R.id.rb_qs_color);
         if (rg != null && rbMono != null && rbColor != null) {
             boolean mono = Prefs.getQsIconMonochrome(this);
             rbMono.setChecked(mono);
             rbColor.setChecked(!mono);
             rg.setOnCheckedChangeListener((g, id) -> {
-                boolean m = (id == R.id.rb_qs_mono);
-                Prefs.setQsIconMonochrome(this, m);
-            });
+                });
         }
     }
 }
