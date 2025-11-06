@@ -16,4 +16,4 @@
     <string name="version_label">Version</string>
     <string name="developer_note">Developer: RiftWalker / Insomniac</string>
     <string name="latest_release_url">https://github.com/RiftWalker0/OneStop/releases/latest</string>
-<string name="menu">Menu</string><string name="updates">Updates</string><string name="updates_info">You can download the latest release from GitHub.</string><string name="themes">Themes</string><string name="setup">Setup</string><string name="about">About</string></resources>
+<string name="menu">Menu</string><string name="updates">Updates</string><string name="updates_info">You can download the latest release from GitHub.</string><string name="themes">Themes</string><string name="setup">Setup</string><string name="about">About</string><string name="home">Home</string></resources>
