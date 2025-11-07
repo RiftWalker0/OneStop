@@ -87,6 +87,147 @@ public class UpdatesActivity extends AppCompatActivity {
                 Intent i = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(i);
             });
+        } catch (RejectedExecutionException ex) {
+            String message = ex.getMessage();
+            if (message == null || message.trim().isEmpty()) {
+                message = getString(R.string.download_latest_failed);
+            }
+            Toast.makeText(this, getString(R.string.download_latest_error, message), Toast.LENGTH_LONG).show();
+            trigger.setEnabled(true);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        downloadExecutor.shutdownNow();
+    }
+
+    private JSONObject fetchLatestRelease() throws IOException, JSONException {
+        HttpURLConnection connection = null;
+        try {
+            URL url = new URL(LATEST_RELEASE_API);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setConnectTimeout(15000);
+            connection.setReadTimeout(20000);
+            connection.setRequestProperty("Accept", "application/vnd.github+json");
+            connection.setRequestProperty("User-Agent", "OneStop-Android");
+
+            int code = connection.getResponseCode();
+            if (code != HttpURLConnection.HTTP_OK) {
+                throw new IOException("GitHub API responded with code " + code);
+            }
+
+            try (InputStream is = new BufferedInputStream(connection.getInputStream())) {
+                byte[] buffer = new byte[4096];
+                int read;
+                StringBuilder builder = new StringBuilder();
+                while ((read = is.read(buffer)) != -1) {
+                    builder.append(new String(buffer, 0, read, StandardCharsets.UTF_8));
+                }
+                return new JSONObject(builder.toString());
+            }
+        } finally {
+            if (connection != null) connection.disconnect();
+        }
+    }
+
+    private ReleaseAsset findApkAsset(JSONObject release) throws JSONException {
+        JSONArray assets = release.optJSONArray("assets");
+        if (assets == null) return null;
+        for (int i = 0; i < assets.length(); i++) {
+            JSONObject asset = assets.getJSONObject(i);
+            String name = asset.optString("name", "");
+            String url = asset.optString("browser_download_url", "");
+            if (name.toLowerCase().endsWith(".apk") && !url.isEmpty()) {
+                return new ReleaseAsset(name, url);
+            }
+        }
+        return null;
+    }
+
+    private File downloadAsset(ReleaseAsset asset) throws IOException {
+        HttpURLConnection connection = null;
+        try {
+            URL url = new URL(asset.url);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setInstanceFollowRedirects(true);
+            connection.setRequestProperty("Accept", "application/octet-stream");
+            connection.setRequestProperty("User-Agent", "OneStop-Android");
+            connection.setConnectTimeout(15000);
+            connection.setReadTimeout(20000);
+
+            int code = connection.getResponseCode();
+            if (code != HttpURLConnection.HTTP_OK) {
+                throw new IOException("Download failed with code " + code);
+            }
+
+            File downloadsDir = getExternalFilesDir(null);
+            if (downloadsDir == null) {
+                downloadsDir = getFilesDir();
+            }
+            if (!downloadsDir.exists() && !downloadsDir.mkdirs()) {
+                throw new IOException("Unable to create download directory");
+            }
+            File apkFile = new File(downloadsDir, asset.name);
+            if (apkFile.exists() && !apkFile.delete()) {
+                throw new IOException("Unable to overwrite existing APK");
+            }
+
+            try (InputStream in = new BufferedInputStream(connection.getInputStream());
+                 FileOutputStream out = new FileOutputStream(apkFile)) {
+                byte[] buffer = new byte[8192];
+                int read;
+                while ((read = in.read(buffer)) != -1) {
+                    out.write(buffer, 0, read);
+                }
+                out.flush();
+            }
+            return apkFile;
+        } finally {
+            if (connection != null) connection.disconnect();
+        }
+    }
+
+    private void promptInstall(File apkFile) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            boolean canInstall = getPackageManager().canRequestPackageInstalls();
+            if (!canInstall) {
+                new MaterialAlertDialogBuilder(this)
+                    .setTitle(R.string.download_latest_permission_title)
+                    .setMessage(R.string.download_latest_permission_message)
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                        Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,
+                            Uri.parse("package:" + getPackageName()));
+                        startActivity(intent);
+                    })
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show();
+                return;
+            }
+        }
+
+        // Build the FileProvider authority from the runtime package name so we avoid
+        // depending on a generated BuildConfig class in release builds.
+        Uri apkUri = FileProvider.getUriForFile(this, getPackageName() + ".provider", apkFile);
+        Intent install = new Intent(Intent.ACTION_VIEW);
+        install.setDataAndType(apkUri, "application/vnd.android.package-archive");
+        install.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        try {
+            startActivity(install);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, R.string.download_latest_no_installer, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private static class ReleaseAsset {
+        final String name;
+        final String url;
+
+        ReleaseAsset(String name, String url) {
+            this.name = name;
+            this.url = url;
         }
     }
 }
