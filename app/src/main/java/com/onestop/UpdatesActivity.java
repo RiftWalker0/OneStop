@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.Gravity;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +15,6 @@ import androidx.core.content.FileProvider;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
@@ -31,16 +29,15 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.RejectedExecutionException;
 
+import androidx.core.content.FileProvider;
+
+import com.onestop.BuildConfig;
 
 public class UpdatesActivity extends AppCompatActivity {
 
     private DrawerLayout drawer;
     private static final String LATEST_RELEASE_API = "https://api.github.com/repos/RiftWalker0/OneStop/releases/latest";
-    private final ExecutorService downloadExecutor = Executors.newSingleThreadExecutor();
 
     private void applyTheme() {
         int mode = Prefs.getTheme(this);
@@ -85,35 +82,10 @@ public class UpdatesActivity extends AppCompatActivity {
 
         Button btn = findViewById(R.id.btn_download_latest);
         if (btn != null) {
-            btn.setOnClickListener(v -> downloadLatestRelease(btn));
-        }
-    }
-
-    private void downloadLatestRelease(Button trigger) {
-        trigger.setEnabled(false);
-        Toast.makeText(this, R.string.download_latest_starting, Toast.LENGTH_SHORT).show();
-        try {
-            downloadExecutor.execute(() -> {
-                try {
-                    JSONObject latest = fetchLatestRelease();
-                    if (latest == null) throw new IOException("No release information found");
-                    ReleaseAsset asset = findApkAsset(latest);
-                    if (asset == null) throw new IOException(getString(R.string.download_latest_no_asset));
-                    File apkFile = downloadAsset(asset);
-                    if (apkFile == null) throw new IOException(getString(R.string.download_latest_failed));
-                    runOnUiThread(() -> promptInstall(apkFile));
-                } catch (IOException | JSONException e) {
-                    runOnUiThread(() -> {
-                        String message = e.getMessage();
-                        if (message == null || message.trim().isEmpty()) {
-                            message = e.getClass().getSimpleName();
-                        }
-                        Toast.makeText(this, getString(R.string.download_latest_error, message), Toast.LENGTH_LONG).show();
-                        trigger.setEnabled(true);
-                    });
-                    return;
-                }
-                runOnUiThread(() -> trigger.setEnabled(true));
+            btn.setOnClickListener(v -> {
+                Uri uri = Uri.parse(getString(R.string.latest_release_url));
+                Intent i = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(i);
             });
         } catch (RejectedExecutionException ex) {
             String message = ex.getMessage();
