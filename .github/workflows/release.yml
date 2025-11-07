@@ -1,0 +1,97 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Semantic version for the release (e.g. 1.2.3)'
+        required: true
+        type: string
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - uses: android-actions/setup-android@v3
+
+      - name: Accept Android SDK licenses
+        run: yes | sdkmanager --licenses
+
+      - name: Install SDK components
+        run: sdkmanager "platforms;android-34" "build-tools;34.0.0" "platform-tools"
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-read-only: false
+
+      - name: Ensure wrapper
+        env:
+          WRAPPER_VERSION: 8.14.3
+        run: |
+          if [ ! -x "./gradlew" ]; then
+            ARCHIVE="gradle-${WRAPPER_VERSION}-bin.zip"
+            curl -sLo "$ARCHIVE" "https://services.gradle.org/distributions/${ARCHIVE}"
+            unzip -q "$ARCHIVE"
+            "./gradle-${WRAPPER_VERSION}/bin/gradle" wrapper --gradle-version "$WRAPPER_VERSION"
+            rm -rf "$ARCHIVE" "gradle-${WRAPPER_VERSION}"
+          fi
+          chmod +x gradlew
+
+      - name: Assemble release APK
+        run: ./gradlew --stacktrace --info --no-daemon :app:assembleRelease
+
+      - name: Prepare signing key
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > release.keystore
+
+      - name: Sign APK
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          APK_DIR="app/build/outputs/apk/release"
+          UNSIGNED_APK=$(ls "$APK_DIR"/*-unsigned.apk 2>/dev/null | head -n 1)
+          if [ -z "$UNSIGNED_APK" ]; then
+            UNSIGNED_APK="$APK_DIR/app-release.apk"
+          fi
+          if [ ! -f "$UNSIGNED_APK" ]; then
+            echo "Unable to locate unsigned APK" >&2
+            exit 1
+          fi
+          SIGNED_APK="$APK_DIR/OneShot_v${VERSION}.apk"
+          "$ANDROID_SDK_ROOT"/build-tools/34.0.0/apksigner sign \
+            --ks release.keystore \
+            --ks-pass pass:${{ secrets.ANDROID_KEYSTORE_PASSWORD }} \
+            --ks-key-alias "${{ secrets.ANDROID_KEY_ALIAS }}" \
+            --key-pass pass:${{ secrets.ANDROID_KEY_PASSWORD }} \
+            --out "$SIGNED_APK" \
+            "$UNSIGNED_APK"
+          echo "SIGNED_APK=$SIGNED_APK" >> $GITHUB_ENV
+
+      - name: Create GitHub release
+        id: create_release
+        env:
+          VERSION: ${{ inputs.version }}
+        uses: actions/create-release@v1
+        with:
+          tag_name: v${{ inputs.version }}
+          release_name: OneStop v${{ inputs.version }}
+          draft: false
+          prerelease: false
+
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ env.SIGNED_APK }}
+          asset_name: OneShot_v${{ inputs.version }}.apk
+          asset_content_type: application/vnd.android.package-archive
