@@ -35,15 +35,11 @@ jobs:
           cache-read-only: false
 
       - name: Ensure wrapper
-        env:
-          WRAPPER_VERSION: 8.14.3
         run: |
           if [ ! -x "./gradlew" ]; then
-            ARCHIVE="gradle-${WRAPPER_VERSION}-bin.zip"
-            curl -sLo "$ARCHIVE" "https://services.gradle.org/distributions/${ARCHIVE}"
-            unzip -q "$ARCHIVE"
-            "./gradle-${WRAPPER_VERSION}/bin/gradle" wrapper --gradle-version "$WRAPPER_VERSION"
-            rm -rf "$ARCHIVE" "gradle-${WRAPPER_VERSION}"
+            curl -sLo gradle-8.7-bin.zip https://services.gradle.org/distributions/gradle-8.7-bin.zip
+            unzip -q gradle-8.7-bin.zip
+            ./gradle-8.7/bin/gradle wrapper --gradle-version 8.7
           fi
           chmod +x gradlew
 
