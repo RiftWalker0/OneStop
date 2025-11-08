@@ -13,11 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    env:
-      GRADLE_OPTS: >-
-        -Dorg.gradle.configuration-cache=true
-        -Dorg.gradle.parallel=true
-        -Dorg.gradle.caching=true
     steps:
       - uses: actions/checkout@v4
 
@@ -35,19 +30,21 @@ jobs:
       - name: Install SDK components
         run: sdkmanager "platforms;android-34" "build-tools;34.0.0" "platform-tools"
 
-      - name: Provision Gradle 9
-        uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: 9.0
           cache-read-only: false
-          configuration-cache-enabled: true
-          add-to-path: true
+
+      - name: Ensure wrapper
+        run: |
+          if [ ! -x "./gradlew" ]; then
+            curl -sLo gradle-8.7-bin.zip https://services.gradle.org/distributions/gradle-8.7-bin.zip
+            unzip -q gradle-8.7-bin.zip
+            ./gradle-8.7/bin/gradle wrapper --gradle-version 8.7
+          fi
+          chmod +x gradlew
 
       - name: Assemble release APK
-        run: >-
-          gradle --stacktrace --info --no-daemon
-          --configuration-cache
-          :app:assembleRelease
+        run: ./gradlew --stacktrace --info --no-daemon :app:assembleRelease
 
       - name: Prepare signing key
         run: |
